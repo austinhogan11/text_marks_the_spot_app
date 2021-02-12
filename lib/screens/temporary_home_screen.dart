@@ -8,7 +8,7 @@ class TemporaryHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: kPrimaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
