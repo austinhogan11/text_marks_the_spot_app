@@ -1,7 +1,5 @@
 # Text Marks the Spot
 
-A geo-location based messaging application built by team 2 in the spring 2021 SWE capstone course at Kennesaw State University.
-
 ## Development Team
 - Austin Hogan
 - Steve Guris
