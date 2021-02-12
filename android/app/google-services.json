@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "187321693866",
+    "project_id": "text-marks-the-spot-c7d11",
+    "storage_bucket": "text-marks-the-spot-c7d11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187321693866:android:a634eb847ef3a3ebf402d3",
+        "android_client_info": {
+          "package_name": "ventures.hotsake.text_marks_the_spot_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187321693866-easbd2kimv5re364b8d1el6nq4aldidg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ventures.hotsake.text_marks_the_spot_app",
+            "certificate_hash": "691218815ca2fa5bf14db70bfd6bf9bdd49e1bce"
+          }
+        },
+        {
+          "client_id": "187321693866-3egoccieh10ejqtlpr89p00hc3dfojkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlefqKLGtz4yaHs_kZabjdhGiTOQMjFYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187321693866-3egoccieh10ejqtlpr89p00hc3dfojkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
