@@ -41,5 +41,5 @@ app.*.symbols
 app.*.map.json
 
 # Google Sign-In/Authentification related
-google-services.json
-GoogleService-Info.plist
+#google-services.json
+#GoogleService-Info.plist
