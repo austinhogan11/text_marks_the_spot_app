@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/apple_sign_in_button.dart';
 import 'package:text_marks_the_spot_app/components/google_sign_in_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
+import 'package:text_marks_the_spot_app/functionality/apple_sign_in_available.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -12,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    final appleSignInAvailable =
+        Provider.of<AppleSignInAvailable>(context, listen: false);
     return Scaffold(
       body: Container(
         color: primaryColor,
@@ -26,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 75),
                 GoogleSignInButton(),
                 SizedBox(height: 15.0),
-                AppleSignInButton(),
+                if (appleSignInAvailable.isAvailable) AppleSignInButton(),
               ],
             ),
           ),
