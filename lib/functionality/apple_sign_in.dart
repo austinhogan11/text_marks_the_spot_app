@@ -1,6 +1,9 @@
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -41,5 +44,18 @@ class AuthService {
       default:
         throw UnimplementedError();
     }
+  }
+}
+
+Future<void> signInWithAppleHandling(BuildContext context) async {
+  try {
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final user = await authService
+        .signInWithApple(scopes: [Scope.email, Scope.fullName]);
+    print('uid: ${user.uid}');
+    Navigator.pushNamed(context, TemporaryHomeScreen.id);
+  } catch (e) {
+    // TODO: Show alert here
+    print(e);
   }
 }

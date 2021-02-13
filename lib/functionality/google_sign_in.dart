@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
+import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -9,7 +12,7 @@ String name;
 String email;
 String imageUrl;
 
-Future<String> signInWithGoogle() async {
+Future<bool> signInWithGoogle() async {
   await Firebase.initializeApp();
 
   // Trigger the authentication flow
@@ -45,11 +48,11 @@ Future<String> signInWithGoogle() async {
     final User currentUser = _auth.currentUser;
     assert(user.uid == currentUser.uid);
 
-    // Print if user is a new user
-    print(authResult.additionalUserInfo.isNewUser);
-    print('signInWithGoogle succeeded: $user');
-
-    return '$user';
+    bool isNewUser = authResult.additionalUserInfo.isNewUser;
+    print('signInWithGoogle succeeded: $user, newUser: $isNewUser');
+    // return '$user';
+    // return user;
+    return isNewUser;
   }
 
   return null;
@@ -59,4 +62,18 @@ void signOutGoogle() async {
   await googleSignIn.signOut();
 
   print("User Signed Out");
+}
+
+Future<void> signInWithGoogleHandling(BuildContext context) async {
+  try {
+    signInWithGoogle().then((isNewUser) {
+      if (isNewUser) {
+        Navigator.pushNamed(context, SignUpScreen.id);
+      } else {
+        Navigator.pushNamed(context, TemporaryHomeScreen.id);
+      }
+    });
+  } catch (e) {
+    print(e);
+  }
 }

@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/apple_sign_in.dart';
-import 'package:text_marks_the_spot_app/functionality/landing_page.dart';
+
 import 'package:text_marks_the_spot_app/screens/login_screen.dart';
+import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
 import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 import 'functionality/apple_sign_in_available.dart';
 
@@ -25,11 +26,11 @@ class TextMarksTheSpot extends StatelessWidget {
       create: (_) => AuthService(),
       child: MaterialApp(
         title: 'Text Marks the Spot',
-        // initialRoute: LandingPage.id,
         initialRoute: LoginScreen.id,
+        // initialRoute: SignUpScreen.id,
         routes: {
-          LandingPage.id: (context) => LandingPage(),
           LoginScreen.id: (context) => LoginScreen(),
+          SignUpScreen.id: (context) => SignUpScreen(),
           TemporaryHomeScreen.id: (context) => TemporaryHomeScreen(),
         },
       ),
