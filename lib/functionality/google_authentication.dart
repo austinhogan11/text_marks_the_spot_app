@@ -8,10 +8,6 @@ import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
-String name;
-String email;
-String imageUrl;
-
 Future<bool> signInWithGoogle() async {
   await Firebase.initializeApp();
 
@@ -31,27 +27,13 @@ Future<bool> signInWithGoogle() async {
   final User user = authResult.user;
 
   if (user != null) {
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-
-    assert(user.email != null);
-    assert(user.displayName != null);
-    assert(user.photoURL != null);
-    name = user.displayName;
-    email = user.email;
-    imageUrl = user.photoURL;
-
-    if (name.contains(" ")) {
-      name = name.substring(0, name.indexOf(" "));
-    }
-
     final User currentUser = _auth.currentUser;
     assert(user.uid == currentUser.uid);
-
+    final userAdditionalInfo = authResult.additionalUserInfo;
     bool isNewUser = authResult.additionalUserInfo.isNewUser;
-    print('signInWithGoogle succeeded: $user, newUser: $isNewUser');
-    // return '$user';
-    // return user;
+    print('signInWithGoogle succeeded: \n'
+        '\nGoogle User Information: $user  \n'
+        '\nAdditional User Information: $userAdditionalInfo');
     return isNewUser;
   }
 
@@ -65,6 +47,7 @@ void signOutGoogle() async {
 }
 
 Future<void> signInWithGoogleHandling(BuildContext context) async {
+  // New users are routed to the sign up screen, Existing users to the home screen
   try {
     signInWithGoogle().then((isNewUser) {
       if (isNewUser) {
