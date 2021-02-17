@@ -29,10 +29,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
-  # The following enable Firebase utilization, including Google Authentication
+  # The following enable Firebase utilization, including Firestore Cloud DB, Google Authentication, Apple Auth...
   firebase_core: ^0.7.0
   firebase_auth: ^0.20.0+1
   google_sign_in: ^4.5.9
+  cloud_firestore: ^0.16.0
 
   # Sign in with Apple Authentication
   apple_sign_in: ^0.1.0
