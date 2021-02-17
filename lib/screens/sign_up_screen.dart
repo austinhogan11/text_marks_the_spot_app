@@ -23,8 +23,13 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                width: 200.0,
+                height: 200.0,
+                child: Image.asset('assets/tmts_logo.png'),
+              ),
               Text(
-                'Create your Username',
+                'Enter a Username:',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
@@ -35,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
                 height: 15.0,
               ),
               TextField(
-                autofocus: true,
+                // autofocus: true,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -46,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   hintText: 'Username',
                   hintStyle: TextStyle(
-                    color: Colors.white,
+                    color: Colors.grey,
                   ),
                 ),
                 onChanged: (value) => enteredUsername = value,
@@ -56,6 +61,9 @@ class SignUpScreen extends StatelessWidget {
               ),
               FlatButton(
                 color: Color(0xFF393E46),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
                 child: Text(
                   'Create',
                   style: TextStyle(
