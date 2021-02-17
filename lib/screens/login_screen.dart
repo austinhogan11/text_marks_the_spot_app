@@ -27,8 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
               // mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                FlutterLogo(size: 150),
-                SizedBox(height: 150.0),
+                // FlutterLogo(size: 150),
+                Container(
+                  width: 300.0,
+                  height: 300.0,
+                  child: Image.asset('assets/tmts_logo.png'),
+                ),
                 SignInButton(
                   image: 'google_logo.png',
                   buttonText: 'Continue with Google',

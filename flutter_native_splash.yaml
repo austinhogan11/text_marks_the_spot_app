@@ -1,0 +1,4 @@
+flutter_native_splash:
+  image: assets/tmts_logo.png
+  color: "#222831"
+  ios: false
