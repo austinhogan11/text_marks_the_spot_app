@@ -1,9 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -44,19 +41,4 @@ void signOutGoogle() async {
   await googleSignIn.signOut();
 
   print("User Signed Out");
-}
-
-Future<void> signInWithGoogleHandling(BuildContext context) async {
-  // New users are routed to the sign up screen, Existing users to the home screen
-  try {
-    signInWithGoogle().then((isNewUser) {
-      if (isNewUser) {
-        Navigator.pushNamed(context, SignUpScreen.id);
-      } else {
-        Navigator.pushNamed(context, TemporaryHomeScreen.id);
-      }
-    });
-  } catch (e) {
-    print(e);
-  }
 }

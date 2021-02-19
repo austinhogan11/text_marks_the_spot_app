@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 
+/*
+- Button widget + styling for login_screen buttons
+- SignInButton requires an image, button text, and a function to handle sign in authentication.
+ */
 class SignInButton extends StatelessWidget {
   final String image;
   final String buttonText;
@@ -20,7 +24,6 @@ class SignInButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
-          // mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(image: AssetImage("assets/$image"), height: 25.0),

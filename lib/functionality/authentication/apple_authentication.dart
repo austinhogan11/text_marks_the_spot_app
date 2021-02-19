@@ -1,10 +1,6 @@
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 class AppleAuthentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,6 +9,7 @@ class AppleAuthentication {
     // 1. perform the sign-in request
     final result = await AppleSignIn.performRequests(
         [AppleIdRequest(requestedScopes: scopes)]);
+
     // 2. check the result
     switch (result.status) {
       case AuthorizationStatus.authorized:
@@ -33,7 +30,8 @@ class AppleAuthentication {
           await firebaseUser.updateProfile(displayName: displayName);
         }
         bool isNewUser = authResult.additionalUserInfo.isNewUser;
-        print('Sign in with Apple uid: ${firebaseUser.uid}');
+        print(
+            'Sign in with Apple uid: ${firebaseUser.uid} New User: $isNewUser');
         return isNewUser;
 
       case AuthorizationStatus.error:
@@ -50,21 +48,5 @@ class AppleAuthentication {
       default:
         throw UnimplementedError();
     }
-  }
-}
-
-Future<void> signInWithAppleHandling(BuildContext context) async {
-  try {
-    final authService =
-        Provider.of<AppleAuthentication>(context, listen: false);
-    final isNewUser = await authService
-        .signInWithApple(scopes: [Scope.email, Scope.fullName]);
-    if (isNewUser)
-      Navigator.pushNamed(context, SignUpScreen.id);
-    else
-      Navigator.pushNamed(context, TemporaryHomeScreen.id);
-  } catch (e) {
-    // TODO: Show alert here
-    print(e);
   }
 }
