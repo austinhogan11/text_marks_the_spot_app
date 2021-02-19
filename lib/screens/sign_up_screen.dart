@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:profanity_filter/profanity_filter.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
+import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -10,8 +11,6 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User loggedInUser = _auth.currentUser;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    String usersCollection = 'users';
     String enteredUsername;
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -69,18 +68,11 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  _firestore.collection(usersCollection).add(
-                    {
-                      'email': loggedInUser.email,
-                      'uid': loggedInUser.uid,
-                      'username': enteredUsername,
-                    },
-                  );
-                  print('New User Added to TMTS DB:\n'
-                      'Email: ${loggedInUser.email}\n'
-                      'uid: ${loggedInUser.uid}\n'
-                      'Username: $enteredUsername');
-                  Navigator.pushNamed(context, TemporaryHomeScreen.id);
+                  bool validUsername = saveNewUser(
+                      loggedInUser.email, loggedInUser.uid, enteredUsername);
+                  if (validUsername) {
+                    Navigator.pushNamed(context, TemporaryHomeScreen.id);
+                  }
                 },
               ),
             ],
