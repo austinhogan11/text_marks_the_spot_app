@@ -67,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  bool validUsername = saveNewUser(
+                  bool validUsername = UserDataHandling().saveNewUser(
                       loggedInUser.email, loggedInUser.uid, enteredUsername);
                   if (validUsername) {
                     Navigator.pushNamed(context, TemporaryHomeScreen.id);

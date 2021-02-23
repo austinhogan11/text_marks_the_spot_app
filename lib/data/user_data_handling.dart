@@ -1,22 +1,38 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-String usersCollection = 'users';
+class UserDataHandling {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
+  DocumentReference userDoc;
 
-bool saveNewUser(String email, String uid, String username) {
-  if (username != null && username.isNotEmpty) {
-    _firestore.collection(usersCollection).add(
-      {
+  bool saveNewUser(String email, String uid, String username) {
+    if (username != null && username.isNotEmpty) {
+      users.doc(uid).set({
         'email': email,
-        'uid': uid,
         'username': username,
-      },
-    );
-    print('New User Added to TMTS DB:\n'
-        'Email: $email\n'
-        'uid: $uid\n'
-        'Username: $username');
-    return true;
+      }).then((value) {
+        print('New User Added to TMTS DB:\n'
+            'Email: $email\n'
+            'Username: $username');
+      }).catchError((e) => print('Failed to add user.'));
+      return true;
+    }
+    return false;
   }
-  return false;
+
+  Future getUsername(String userUID) async {
+    String username;
+    try {
+      await users.doc(userUID).get().then((value) {
+        username = value.data()["username"];
+      });
+      return username;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
 }

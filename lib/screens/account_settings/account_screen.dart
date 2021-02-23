@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/avatar.dart';
 import 'package:text_marks_the_spot_app/components/settings_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
+import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/change_username_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
@@ -14,8 +17,30 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String username;
+  @override
+  void initState() {
+    super.initState();
+    fetchUsername();
+  }
+
+  fetchUsername() async {
+    final User loggedInUser = _auth.currentUser;
+    dynamic result = await UserDataHandling().getUsername(loggedInUser.uid);
+
+    if (result == null) {
+      print('Unable to retrieve username');
+    } else {
+      setState(() {
+        username = result;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return Scaffold(
       backgroundColor: kAccentColor,
       appBar: AppBar(
@@ -46,7 +71,7 @@ class _AccountScreenState extends State<AccountScreen> {
               Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
-                  '<username>',
+                  username == null ? '' : username,
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
