@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
-import 'package:text_marks_the_spot_app/screens/account_settings/change_username_screen.dart';
 import 'package:text_marks_the_spot_app/screens/login_screen.dart';
 
 class SettingsButton extends StatelessWidget {
@@ -17,9 +15,7 @@ class SettingsButton extends StatelessWidget {
       child: OutlineButton(
         splashColor: Colors.white,
         onPressed: () {
-          if (screenNavRoute == LoginScreen.id) {
-            userSignOutHandling(context);
-          }
+          if (screenNavRoute == LoginScreen.id) userSignOutHandling(context);
           Navigator.pushNamed(context, screenNavRoute);
         },
         shape: RoundedRectangleBorder(
