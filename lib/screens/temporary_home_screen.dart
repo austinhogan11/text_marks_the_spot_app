@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
+import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 
 class TemporaryHomeScreen extends StatelessWidget {
   static const String id = 'temp_home_screen';
@@ -11,7 +11,7 @@ class TemporaryHomeScreen extends StatelessWidget {
     final User loggedInUser = _auth.currentUser;
     print(loggedInUser.email);
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: kAccentColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,15 +28,15 @@ class TemporaryHomeScreen extends StatelessWidget {
               height: 15.0,
             ),
             FlatButton(
-              color: Color(0xFF393E46),
+              color: kPrimaryColor,
               child: Text(
-                'Sign Out',
+                'Settings',
                 style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.white,
                 ),
               ),
-              onPressed: () => userSignOutHandling(context),
+              onPressed: () => Navigator.pushNamed(context, AccountScreen.id),
             ),
           ],
         ),

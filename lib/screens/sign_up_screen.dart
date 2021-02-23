@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:profanity_filter/profanity_filter.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
