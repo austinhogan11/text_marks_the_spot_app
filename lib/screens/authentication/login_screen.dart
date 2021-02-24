@@ -33,14 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   image: 'google_logo.png',
                   buttonText: 'Continue with Google',
-                  signInFunction: () => signInWithGoogleHandling(context),
+                  onTap: () => signInWithGoogleHandling(context),
                 ),
                 SizedBox(height: 15.0),
                 if (appleSignInAvailable.isAvailable)
                   SignInButton(
                     image: 'apple_icon.png',
                     buttonText: 'Continue with Apple',
-                    signInFunction: () => signInWithAppleHandling(context),
+                    onTap: () => signInWithAppleHandling(context),
                   ),
               ],
             ),

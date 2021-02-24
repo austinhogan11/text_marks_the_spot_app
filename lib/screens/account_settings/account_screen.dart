@@ -8,7 +8,7 @@ import 'package:text_marks_the_spot_app/screens/account_settings/change_username
 import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
-import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   static const String id = 'account_screen';
@@ -46,8 +46,7 @@ class _AccountScreenState extends State<AccountScreen> {
         leading: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: IconButton(
-            onPressed: () =>
-                Navigator.pushNamed(context, TemporaryHomeScreen.id),
+            onPressed: () => Navigator.pushNamed(context, HomeScreen.id),
             icon: Icon(
               Icons.arrow_back_ios,
               color: Colors.white,

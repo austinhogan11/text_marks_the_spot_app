@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_authentication.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home_screen.dart';
 
 import 'google_authentication.dart';
 
@@ -37,7 +37,7 @@ void authenticationScreenRouting(BuildContext context, bool isNewUser) {
   if (isNewUser)
     Navigator.pushNamed(context, SignUpScreen.id);
   else
-    Navigator.pushNamed(context, TemporaryHomeScreen.id);
+    Navigator.pushNamed(context, HomeScreen.id);
 }
 
 void userSignOutHandling(BuildContext context) {
@@ -47,5 +47,16 @@ void userSignOutHandling(BuildContext context) {
     Navigator.pushNamed(context, LoginScreen.id);
   } catch (e) {
     print(e);
+  }
+}
+
+Future<void> cancelAccountCreation(BuildContext context) async {
+  try {
+    await FirebaseAuth.instance.currentUser.delete();
+    Navigator.pop(context);
+    print('Account creation cancelled and removed from firebase auth');
+  } catch (e) {
+    print(e);
+    print('Failed to cancel account creation.');
   }
 }
