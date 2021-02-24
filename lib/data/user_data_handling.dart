@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 /*
   Data Handling Class for the users collection in Firestore
@@ -31,7 +32,7 @@ class UserDataHandling {
 
   //Finds the user in the users collection based on the currently logged in user's UID code
   // Returns the username eof the logged in user.
-  Future getUsername(String userUID) async {
+  Future<String> getUsername(String userUID) async {
     String username;
     try {
       await users.doc(userUID).get().then((value) {
@@ -42,5 +43,17 @@ class UserDataHandling {
       print(e);
       return null;
     }
+  }
+
+  bool updateUsername(String userUID, String newUsername) {
+    if (newUsername != null && newUsername.isNotEmpty) {
+      users
+          .doc(userUID)
+          .update({'username': newUsername})
+          .then((value) => print("Username updated to $newUsername"))
+          .catchError((e) => print("Could not update username: $e"));
+      return true;
+    }
+    return false;
   }
 }

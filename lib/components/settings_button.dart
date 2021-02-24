@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
-import 'package:text_marks_the_spot_app/screens/login_screen.dart';
+import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 
 /*
   A custom outline button widget for the buttons featured on the Account Screen

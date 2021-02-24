@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_authentication.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/change_username_screen.dart';
+import 'package:text_marks_the_spot_app/screens/account_settings/changed_username_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
-import 'package:text_marks_the_spot_app/screens/login_screen.dart';
-import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
+import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
+import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
 import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 import 'functionality/authentication/apple_sign_in_available.dart';
@@ -34,13 +35,14 @@ class TextMarksTheSpot extends StatelessWidget {
 
         // Application Screen Navigation set up
         initialRoute: LoginScreen.id,
-        // initialRoute: AccountScreen.id,
+        // initialRoute: ChangedUsernameScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),
           TemporaryHomeScreen.id: (context) => TemporaryHomeScreen(),
           AccountScreen.id: (context) => AccountScreen(),
           ChangeUserNameScreen.id: (context) => ChangeUserNameScreen(),
+          ChangedUsernameScreen.id: (context) => ChangedUsernameScreen(),
           LocationServicesScreen.id: (context) => LocationServicesScreen(),
           HelpScreen.id: (context) => HelpScreen(),
         },

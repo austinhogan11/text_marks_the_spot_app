@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_authentication.dart';
-import 'package:text_marks_the_spot_app/screens/login_screen.dart';
-import 'package:text_marks_the_spot_app/screens/sign_up_screen.dart';
+import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
+import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
 import 'package:text_marks_the_spot_app/screens/temporary_home_screen.dart';
 
 import 'google_authentication.dart';
