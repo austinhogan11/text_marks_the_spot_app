@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
+/*
+      App bar design for Non-Homescreen Screens
+      Features a back button for navigation
+ */
 class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

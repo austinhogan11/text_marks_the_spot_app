@@ -1,10 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/*
+  Data Handling Class for the users collection in Firestore
+ */
+
 class UserDataHandling {
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
   DocumentReference userDoc;
 
+  /*
+    Adds a newly created account to the users collection
+    The document ID is saved as the Firebase Auth UID code
+    The email & username for the user are saved
+   */
   bool saveNewUser(String email, String uid, String username) {
     if (username != null && username.isNotEmpty) {
       users.doc(uid).set({
@@ -20,6 +29,8 @@ class UserDataHandling {
     return false;
   }
 
+  //Finds the user in the users collection based on the currently logged in user's UID code
+  // Returns the username eof the logged in user.
   Future getUsername(String userUID) async {
     String username;
     try {

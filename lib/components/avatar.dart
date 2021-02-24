@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
+//  Currently just serving as a placeholder in the account screen
 class Avatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
 import 'package:text_marks_the_spot_app/screens/login_screen.dart';
 
+/*
+  A custom outline button widget for the buttons featured on the Account Screen
+  The button is passed label text & the route to the next screen when pressed.
+ */
+
 class SettingsButton extends StatelessWidget {
   final String btnText;
   final String screenNavRoute;
