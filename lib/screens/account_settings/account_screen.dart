@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/avatar.dart';
+import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/components/settings_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
@@ -42,19 +43,10 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kAccentColor,
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-          child: IconButton(
-            onPressed: () => Navigator.pushNamed(context, HomeScreen.id),
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        backgroundColor: kPrimaryColor,
-        title: Text('Account Settings'),
+      appBar: CustomAppBar(
+        title: 'Account Settings',
+        icon: kBackIconButton,
+        iconFunction: () => Navigator.pushNamed(context, HomeScreen.id),
       ),
       body: Center(
         child: Padding(

@@ -19,10 +19,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final appleSignInAvailable = await AppleSignInAvailable.check();
-  runApp(Provider<AppleSignInAvailable>.value(
-    value: appleSignInAvailable,
-    child: TextMarksTheSpot(),
-  ));
+  runApp(
+    Provider<AppleSignInAvailable>.value(
+      value: appleSignInAvailable,
+      child: TextMarksTheSpot(),
+    ),
+  );
 }
 
 class TextMarksTheSpot extends StatelessWidget {
@@ -34,8 +36,7 @@ class TextMarksTheSpot extends StatelessWidget {
         title: 'Text Marks the Spot',
 
         // Application Screen Navigation set up
-        // initialRoute: LoginScreen.id,
-        initialRoute: HomeScreen.id,
+        initialRoute: LoginScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),

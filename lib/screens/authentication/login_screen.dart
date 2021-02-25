@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:text_marks_the_spot_app/components/sign_in_button.dart';
+import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_sign_in_available.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
@@ -30,16 +30,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 300.0,
                   child: Image.asset('assets/tmts_logo.png'),
                 ),
-                SignInButton(
+                CustomButton(
                   image: 'google_logo.png',
-                  buttonText: 'Continue with Google',
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  btnText: 'Continue with Google',
+                  fontSize: 20.0,
                   onTap: () => signInWithGoogleHandling(context),
                 ),
                 SizedBox(height: 15.0),
                 if (appleSignInAvailable.isAvailable)
-                  SignInButton(
+                  CustomButton(
                     image: 'apple_icon.png',
-                    buttonText: 'Continue with Apple',
+                    color: Colors.white,
+                    textColor: Colors.black,
+                    btnText: 'Continue with Apple',
+                    fontSize: 20.0,
                     onTap: () => signInWithAppleHandling(context),
                   ),
               ],
