@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
+import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
 import 'package:text_marks_the_spot_app/screens/home_screen.dart';
 
@@ -77,7 +77,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  bool validUsername = UserDataHandling().saveNewUser(
+                  bool validUsername = DataHandling().saveNewUser(
                       loggedInUser.email, loggedInUser.uid, enteredUsername);
                   if (validUsername) {
                     Navigator.pushNamed(context, HomeScreen.id);

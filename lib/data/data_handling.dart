@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 /*
   Data Handling Class for the users collection in Firestore
  */
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
-class UserDataHandling {
+class DataHandling {
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
   DocumentReference userDoc;
 
+  final CollectionReference textmarks =
+      FirebaseFirestore.instance.collection('textmarks');
   /*
     Adds a newly created account to the users collection
     The document ID is saved as the Firebase Auth UID code
@@ -54,5 +59,37 @@ class UserDataHandling {
       return true;
     }
     return false;
+  }
+
+  Future<void> saveTextMark(String recipientUsername, String location,
+      String locationNickname, String messageContents) async {
+    final User loggedInUser = _auth.currentUser;
+
+    //Gets the uid of the entered username for the recipient
+    String recipientUID;
+    await users.get().then((QuerySnapshot querySnapshot) => {
+          querySnapshot.docs.forEach((doc) {
+            if (recipientUsername == doc['username']) {
+              print(
+                  'Username: $recipientUsername\nDocument Username: ${doc['username']}');
+              print(doc.id);
+              recipientUID = doc.id;
+              print(recipientUID);
+            }
+          })
+        });
+
+    //Creates a new textmark document
+    textmarks
+        .add({
+          'senderUID': loggedInUser.uid,
+          'recipientUID': recipientUID,
+          'location': location,
+          'locationNickname': locationNickname,
+          'message': messageContents,
+        })
+        .then((value) => print(
+            'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nLocation: $location\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
+        .catchError((e) => print('Failed to save Textmark.'));
   }
 }

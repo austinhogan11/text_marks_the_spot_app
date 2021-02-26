@@ -42,9 +42,9 @@ class CustomButton extends StatelessWidget {
               child: Text(
                 btnText,
                 style: TextStyle(
-                  fontSize: fontSize,
-                  color: textColor,
-                ),
+                    fontSize: fontSize,
+                    color: textColor,
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],

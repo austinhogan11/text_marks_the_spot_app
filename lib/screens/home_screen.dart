@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
+import 'package:text_marks_the_spot_app/create_textmark_screen.dart';
+import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
+
+  Widget buildTextmarkCreator(BuildContext context) {
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +38,13 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                        icon: Icon(
-                          Icons.location_searching_sharp,
-                          size: 55.0,
-                          color: kPrimaryColor,
-                        ),
-                        onPressed: null),
+                      icon: Icon(
+                        Icons.location_searching_sharp,
+                        size: 55.0,
+                        color: kPrimaryColor,
+                      ),
+                      onPressed: () {},
+                    ),
                   ],
                 ),
                 Expanded(
@@ -47,7 +55,12 @@ class HomeScreen extends StatelessWidget {
                   textColor: Colors.white,
                   btnText: 'Create a Text Mark',
                   fontSize: 22.5,
-                  onTap: () => print('Create a Text Mark pressed'),
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) => CreateTextMark(),
+                    );
+                  },
                 ),
               ],
             ),

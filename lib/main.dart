@@ -37,6 +37,7 @@ class TextMarksTheSpot extends StatelessWidget {
 
         // Application Screen Navigation set up
         initialRoute: LoginScreen.id,
+        // initialRoute: HomeScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),

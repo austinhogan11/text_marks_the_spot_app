@@ -15,3 +15,14 @@ const Icon kSettingsIconButton = Icon(
   size: 30.0,
   color: Colors.white,
 );
+
+const TextStyle kTextMarkTextStyleBold = TextStyle(
+  color: Colors.white,
+  fontSize: 17.0,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle kTextMarkTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 13.0,
+);

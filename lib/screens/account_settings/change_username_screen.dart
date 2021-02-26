@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
+import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/changed_username_screen.dart';
 
 import '../../constants.dart';
@@ -78,7 +78,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  bool validUsername = UserDataHandling()
+                  bool validUsername = DataHandling()
                       .updateUsername(loggedInUser.uid, newUsername);
                   if (validUsername) {
                     Navigator.pushNamed(context, ChangedUsernameScreen.id);

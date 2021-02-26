@@ -4,7 +4,7 @@ import 'package:text_marks_the_spot_app/components/avatar.dart';
 import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/components/settings_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/data/user_data_handling.dart';
+import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/change_username_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
@@ -28,7 +28,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   fetchUsername() async {
     final User loggedInUser = _auth.currentUser;
-    dynamic result = await UserDataHandling().getUsername(loggedInUser.uid);
+    dynamic result = await DataHandling().getUsername(loggedInUser.uid);
 
     if (result == null) {
       print('Unable to retrieve username');
