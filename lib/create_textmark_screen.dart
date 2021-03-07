@@ -13,7 +13,8 @@ class _CreateTextMarkState extends State<CreateTextMark> {
   @override
   Widget build(BuildContext context) {
     String textMarkRecipientUsername;
-    String textMarkLocation = '123 Text Mark st. Acworth, Ga 30101';
+    String textMarkLocation =
+        'Fulham Rd, Fulham, London SW6 1HS, United Kingdom';
     String textMarkNickname;
     String textMarkMessage;
     return Scaffold(
