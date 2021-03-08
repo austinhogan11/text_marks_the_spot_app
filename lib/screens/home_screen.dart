@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
@@ -9,12 +10,34 @@ import 'package:text_marks_the_spot_app/functionality/geolocation/geolocation.da
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../functionality/geolocation/geolocation.dart';
+import '../functionality/geolocation/geolocation.dart';
+import '../functionality/geolocation/geolocation.dart';
+import '../functionality/geolocation/geolocation.dart';
+import '../functionality/geolocation/geolocation.dart';
+
+class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+
+  }
+
+class _HomeScreenState extends State<HomeScreen>{
+
+  var message = "";
+  String latitude = "";
+  String longitude = "";
+
+  double l = 52.5;
+  double ll = -0.18;
 
   Widget buildTextmarkCreator(BuildContext context) {
     return Container();
   }
+
+  MapController _controller = new MapController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +52,14 @@ class HomeScreen extends StatelessWidget {
         child: Stack(
             overflow: Overflow.visible,
           children: [
-            FlutterMap(
-            options: MapOptions(
-              center: LatLng(51.5, -0.09),
-              zoom: 13.0,
-            ),
-            layers: [
-              TileLayerOptions(
+            new FlutterMap(
+              mapController: _controller,
+              options: new MapOptions(
+                center: LatLng(l, ll),
+                zoom: 10.0,
+              ),
+              layers: [
+                TileLayerOptions(
                   urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                   subdomains: ['a', 'b', 'c']
               ),
@@ -55,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                           size: 55.0,
                           color: kPrimaryColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () {getLocation();},
                       ),
                     ],
                   ),
@@ -81,5 +105,27 @@ class HomeScreen extends StatelessWidget {
       ),
       ),
     );
+  }
+
+  void getLocation() async {
+    var p = await determinePosition();
+
+
+    latitude = "$l";
+    longitude = "$ll";
+
+    print(p.latitude);
+    print(p.longitude);
+
+    setState(() {
+      l = p.latitude;
+      ll = p.longitude;
+      message = "Works";
+      _controller.onReady.then((result){
+        _controller.move(LatLng(p.latitude,p.longitude), 10);
+      });
+
+    });
+
   }
 }
