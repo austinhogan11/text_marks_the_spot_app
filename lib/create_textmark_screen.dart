@@ -70,10 +70,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                               color: Colors.grey,
                             ),
                           ),
-                          onChanged: (value) {
-                            textMarkNickname = value;
-                            print(textMarkNickname);
-                          },
+                          onChanged: (value) => textMarkNickname = value,
                         ),
                         // Expanded(child: SizedBox()),
                         TextField(
