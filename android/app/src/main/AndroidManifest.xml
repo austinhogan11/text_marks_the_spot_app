@@ -9,6 +9,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="text_marks_the_spot_app"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBPwcMWI6ff671ght3wgWGsIpsL2XkvgWg"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

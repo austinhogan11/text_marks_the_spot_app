@@ -61,7 +61,7 @@ class DataHandling {
     return false;
   }
 
-  Future<void> saveTextMark(String recipientUsername, String location,
+  Future<void> saveTextMark(String recipientUsername, GeoPoint coordinates,
       String locationNickname, String messageContents) async {
     final User loggedInUser = _auth.currentUser;
 
@@ -84,12 +84,13 @@ class DataHandling {
         .add({
           'senderUID': loggedInUser.uid,
           'recipientUID': recipientUID,
-          'location': location,
+          'address': "not yet",
+          'coordinates': coordinates,
           'locationNickname': locationNickname,
           'message': messageContents,
         })
         .then((value) => print(
-            'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nLocation: $location\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
+            'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
         .catchError((e) => print('Failed to save Textmark.'));
   }
 }

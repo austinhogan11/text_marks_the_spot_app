@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
@@ -5,18 +6,21 @@ import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/home_screen.dart';
 
 class CreateTextMark extends StatefulWidget {
+
+  final GeoPoint coordinates;
+
+  const CreateTextMark ({ Key key, this.coordinates }): super(key: key);
+
   @override
   _CreateTextMarkState createState() => _CreateTextMarkState();
 }
 
 class _CreateTextMarkState extends State<CreateTextMark> {
   @override
+  String textMarkRecipientUsername;
+  String textMarkNickname;
+  String textMarkMessage;
   Widget build(BuildContext context) {
-    String textMarkRecipientUsername;
-    String textMarkLocation =
-        'Fulham Rd, Fulham, London SW6 1HS, United Kingdom';
-    String textMarkNickname;
-    String textMarkMessage;
     return Scaffold(
       body: Container(
         color: Color(0xFF757575),
@@ -51,7 +55,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          textMarkLocation,
+                          "Get address from coordinates",
                           style: kTextMarkTextStyle,
                         ),
                         RadiusSlider(),
@@ -66,7 +70,10 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                               color: Colors.grey,
                             ),
                           ),
-                          onChanged: (value) => textMarkNickname = value,
+                          onChanged: (value) {
+                            textMarkNickname = value;
+                            print(textMarkNickname);
+                          },
                         ),
                         // Expanded(child: SizedBox()),
                         TextField(
@@ -111,7 +118,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   textColor: kPrimaryColor,
                   onTap: () => {
                     DataHandling().saveTextMark(textMarkRecipientUsername,
-                        textMarkLocation, textMarkNickname, textMarkMessage),
+                        widget.coordinates, textMarkNickname, textMarkMessage),
                     Navigator.pushNamed(context, HomeScreen.id),
                   },
                 )
