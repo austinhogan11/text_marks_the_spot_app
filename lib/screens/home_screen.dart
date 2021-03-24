@@ -11,6 +11,7 @@ import 'package:text_marks_the_spot_app/create_textmark_screen.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 import 'package:text_marks_the_spot_app/functionality/geolocation/geolocation.dart';
+import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
 //import 'package:flutter_map/flutter_map.dart';
 //import 'package:latlong/latlong.dart';
 
@@ -102,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             new GeoPoint(coor.latitude, coor.longitude);
                         _markers.add(currentMarker);
                       },
-                      mapType: MapType.hybrid,
+                      // mapType: MapType.hybrid,
+                      mapType: MapType.normal,
                       onCameraMove: (CameraPosition position) {
                         setState(() {
                           currentCenter = position.target;
@@ -119,29 +121,58 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
               Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: SafeArea(
                     child: Column(
                       children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 30.0, 0, 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RawMaterialButton(
+                                elevation: 2.0,
+                                // fillColor: Colors.teal,
+                                fillColor: kPrimaryColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Icon(
+                                    Icons.location_searching_sharp,
+                                    size: 45.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                shape: CircleBorder(),
+                                onPressed: () {
+                                  getLocation();
+                                  _mapController.animateCamera(
+                                      CameraUpdate.newCameraPosition(
+                                          CameraPosition(
+                                              target: LatLng(this.latitude,
+                                                  this.longitude),
+                                              zoom: 15.0)));
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.location_searching_sharp,
-                                size: 55.0,
-                                color: kPrimaryColor,
-                              ),
-                              onPressed: () {
-                                getLocation();
-                                _mapController.animateCamera(
-                                    CameraUpdate.newCameraPosition(
-                                        CameraPosition(
-                                            target: LatLng(
-                                                this.latitude, this.longitude),
-                                            zoom: 15.0)));
-                              },
-                            ),
+                            RawMaterialButton(
+                                elevation: 2.0,
+                                fillColor: kPrimaryColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Icon(
+                                    Icons.message_sharp,
+                                    size: 45.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                shape: CircleBorder(),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, TextmarksPageView.id)),
                           ],
                         ),
                         Expanded(
