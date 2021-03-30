@@ -9,9 +9,8 @@ import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dar
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
-import 'package:text_marks_the_spot_app/screens/messages/received_textmarks_screen.dart';
 
 import 'functionality/authentication/apple_sign_in_available.dart';
 
@@ -38,9 +37,9 @@ class TextMarksTheSpot extends StatelessWidget {
         title: 'Text Marks the Spot',
 
         // Application Screen Navigation set up
-        // initialRoute: LoginScreen.id,
+        initialRoute: LoginScreen.id,
         // initialRoute: TextmarksPageView.id,
-        initialRoute: HomeScreen.id,
+        // initialRoute: HomeScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),

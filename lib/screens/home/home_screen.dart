@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/create_textmark_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/create_textmark_screen.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 import 'package:text_marks_the_spot_app/functionality/geolocation/geolocation.dart';
@@ -15,7 +15,7 @@ import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dar
 //import 'package:flutter_map/flutter_map.dart';
 //import 'package:latlong/latlong.dart';
 
-import '../functionality/geolocation/geolocation.dart';
+import '../../functionality/geolocation/geolocation.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -23,8 +23,6 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
-// TODO: Add button to navigate to textmarks screen
 
 class _HomeScreenState extends State<HomeScreen> {
   Widget buildTextmarkCreator(BuildContext context) {
@@ -44,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double longitude = 0;
   double currentZoom = 15;
   CameraPosition cameraPosition;
+  List<String> sentTMNicknames;
 
   @override
   void initState() {
@@ -89,13 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               markerId: MarkerId(coor.toString()),
                               position: coor,
                               onTap: () {
-                                print("eeeee ${coor}");
+                                print("eeeee $coor");
                               },
                               infoWindow: InfoWindow(
                                   title: "",
                                   snippet: "",
                                   onTap: () {
-                                    print("eeeee ${coor}");
+                                    print("eeeee $coor");
                                   }),
                               icon: BitmapDescriptor.defaultMarker);
                         });
@@ -171,8 +170,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 shape: CircleBorder(),
-                                onPressed: () => Navigator.pushNamed(
-                                    context, TextmarksPageView.id)),
+                                onPressed: () {
+                                  print(sentTMNicknames);
+                                  Navigator.pushNamed(
+                                      context, TextmarksPageView.id);
+                                }),
                           ],
                         ),
                         Expanded(

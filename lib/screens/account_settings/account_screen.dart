@@ -9,7 +9,7 @@ import 'package:text_marks_the_spot_app/screens/account_settings/change_username
 import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   static const String id = 'account_screen';

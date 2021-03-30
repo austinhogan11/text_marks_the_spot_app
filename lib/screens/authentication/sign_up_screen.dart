@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const String id = 'sign_up_screen';
