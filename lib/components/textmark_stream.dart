@@ -28,39 +28,25 @@ class TextmarksStream extends StatelessWidget {
         final textmarksDocs = snapshot.data.docs;
         List<TextmarkCard> textmarkCards = [];
 
-        if (isSentStream) {
-          for (var textmark in textmarksDocs) {
-            final sender = textmark['senderUID'];
+        for (var textmark in textmarksDocs) {
+          final user =
+              (isSentStream) ? textmark['senderUID'] : textmark['recipientUID'];
 
-            if (sender == currentUser.uid) {
-              final date = textmark['textmarkDate'];
-              final recipient = textmark['recipientUsername'];
-              final locationNickname = textmark['locationNickname'];
-              final textmarkCard = TextmarkCard(
-                date: date,
-                username: recipient,
-                isSender: true,
-                locationNickname: locationNickname,
-              );
-              textmarkCards.add(textmarkCard);
-            }
-          }
-        } else {
-          for (var textmark in textmarksDocs) {
-            final recipient = textmark['recipientUID'];
-
-            if (recipient == currentUser.uid) {
-              final date = textmark['textmarkDate'];
-              final sender = textmark['senderUsername'];
-              final locationNickname = textmark['locationNickname'];
-              final textmarkCard = TextmarkCard(
-                date: date,
-                username: sender,
-                isSender: false,
-                locationNickname: locationNickname,
-              );
-              textmarkCards.add(textmarkCard);
-            }
+          if (user == currentUser.uid) {
+            final date = textmark['textmarkDate'];
+            final externalUser = (isSentStream)
+                ? textmark['recipientUsername']
+                : textmark['senderUsername'];
+            final locationNickname = textmark['locationNickname'];
+            final coordinates = textmark['coordinates'];
+            final textmarkCard = TextmarkCard(
+              date: date,
+              username: externalUser,
+              isSender: (isSentStream) ? true : false,
+              locationNickname: locationNickname,
+              coordinates: coordinates,
+            );
+            textmarkCards.add(textmarkCard);
           }
         }
         return ListView(

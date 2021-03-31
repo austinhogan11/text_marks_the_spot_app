@@ -66,11 +66,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "Get address from coordinates",
-                          style: kTextMarkTextStyle,
-                        ),
-                        RadiusSlider(),
+                        // RadiusSlider(),
                         TextField(
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -84,7 +80,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                           ),
                           onChanged: (value) => textMarkNickname = value,
                         ),
-                        // Expanded(child: SizedBox()),
                         TextField(
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -99,7 +94,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                             onChanged: (value) => {
                                   textMarkRecipientUsername = value,
                                 }),
-                        // Expanded(child: SizedBox()),
                         TextField(
                           textAlign: TextAlign.center,
                           style: TextStyle(
