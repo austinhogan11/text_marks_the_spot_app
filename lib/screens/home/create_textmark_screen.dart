@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
-import 'package:text_marks_the_spot_app/screens/messages/received_textmarks_screen.dart';
+
+final User currentUser = FirebaseAuth.instance.currentUser;
 
 class CreateTextMark extends StatefulWidget {
   final GeoPoint coordinates;
@@ -126,7 +128,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   onTap: () => {
                     DataHandling().saveTextMark(
                         textmarkDate,
-                        loggedInUser.uid,
+                        currentUser.uid,
                         textMarkRecipientUsername,
                         widget.coordinates,
                         textMarkNickname,
