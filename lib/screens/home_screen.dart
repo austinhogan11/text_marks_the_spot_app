@@ -29,8 +29,6 @@ class _HomeScreenState extends State<HomeScreen>  {
     return Container();
   }
 
-  String snippet;
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static LatLng _initialPosition;
@@ -49,16 +47,8 @@ class _HomeScreenState extends State<HomeScreen>  {
     getLocation();
   }
 
-  Completer<GoogleMapController> _controller = new Completer();
-
   var _mapController;
 
-  _onMapCreated(GoogleMapController controller) async {
-    getMarkers();
-    setState(() {
-      _controller.complete(controller);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen>  {
             overflow: Overflow.visible,
             alignment: Alignment.center,
             children: [
-          _initialPosition == null
+          this.cameraPosition == null
               ? CircularProgressIndicator()
               : GoogleMap(
             markers: _markers,
@@ -111,9 +101,6 @@ class _HomeScreenState extends State<HomeScreen>  {
             onMapCreated: (GoogleMapController controller) {
               _mapController = controller;
               getMarkers();
-              setState(() {
-
-              });
             },
           ),
           Padding(
@@ -181,6 +168,13 @@ class _HomeScreenState extends State<HomeScreen>  {
 
    // _markers.removeWhere((element) => element.markerId.toString() == "You");
 
+
+
+    ImageConfiguration configuration = createLocalImageConfiguration(context);
+
+    BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(configuration, 'assets/image0.png');
+
+    print(b.toJson());
     _markers.add(new Marker(markerId: new MarkerId("You"),
         position: LatLng(latitude, longitude), onTap: (){
           print("OOOOOOOO");
@@ -188,9 +182,10 @@ class _HomeScreenState extends State<HomeScreen>  {
         infoWindow: InfoWindow(
             title: "You",
             onTap: (){
-              print("OOOOOOOO");
+              print("OOOOOppppp");
             }
-        ),icon: BitmapDescriptor.defaultMarkerWithHue(50)));
+        ),icon: b));
+    print(b.toJson());
   }
 
   void getMarkers() async {
@@ -198,6 +193,8 @@ class _HomeScreenState extends State<HomeScreen>  {
 
     CollectionReference textmarks = DataHandling().textmarks;
     QuerySnapshot firestoreTextMarks = await textmarks.get();
+
+    GetOptions w = new GetOptions();
 
     CollectionReference users = DataHandling().users;
     QuerySnapshot firestoreUsers = await users.get();
@@ -220,6 +217,16 @@ class _HomeScreenState extends State<HomeScreen>  {
           hue = 0;
           user = firestoreUsers.docs.firstWhere((element) => element.id.toString() == map["senderUID"]);
         }
+
+        BitmapDescriptor b;
+
+        BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(12, 12)),
+            'fonts/MyFlutterApp.ttf')
+            .then((d) {
+          b = d;
+        });
+
+
         _markers.add(new Marker(markerId: new MarkerId(id),
             position: LatLng(g.latitude, g.longitude), onTap: (){
               print("OOOOOOOO");
@@ -230,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                 onTap: (){
                   print("OOOOOOOO");
                 }
-            ),icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
+            ),icon: b));
         setState(() {
          // print(_markers);
         });
