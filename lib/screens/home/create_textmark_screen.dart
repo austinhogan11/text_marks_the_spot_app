@@ -1,21 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
+
+final User currentUser = FirebaseAuth.instance.currentUser;
 
 class CreateTextMark extends StatefulWidget {
-
   final GeoPoint coordinates;
 
-  const CreateTextMark ({ Key key, this.coordinates }): super(key: key);
+  const CreateTextMark({Key key, this.coordinates}) : super(key: key);
 
   @override
   _CreateTextMarkState createState() => _CreateTextMarkState();
 }
 
+var currentDate;
+String textmarkDate;
+
 class _CreateTextMarkState extends State<CreateTextMark> {
+  @override
+  void initState() {
+    super.initState();
+    currentDate = DateTime.now();
+    textmarkDate = currentDate.toString().substring(5, 10);
+  }
+
   @override
   String textMarkRecipientUsername;
   String textMarkNickname;
@@ -54,11 +66,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "Get address from coordinates",
-                          style: kTextMarkTextStyle,
-                        ),
-                        RadiusSlider(),
+                        // RadiusSlider(),
                         TextField(
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -72,7 +80,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                           ),
                           onChanged: (value) => textMarkNickname = value,
                         ),
-                        // Expanded(child: SizedBox()),
                         TextField(
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -87,7 +94,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                             onChanged: (value) => {
                                   textMarkRecipientUsername = value,
                                 }),
-                        // Expanded(child: SizedBox()),
                         TextField(
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -114,8 +120,13 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   color: Colors.white,
                   textColor: kPrimaryColor,
                   onTap: () => {
-                    DataHandling().saveTextMark(textMarkRecipientUsername,
-                        widget.coordinates, textMarkNickname, textMarkMessage),
+                    DataHandling().saveTextMark(
+                        textmarkDate,
+                        currentUser.uid,
+                        textMarkRecipientUsername,
+                        widget.coordinates,
+                        textMarkNickname,
+                        textMarkMessage),
                     Navigator.pushNamed(context, HomeScreen.id),
                   },
                 )

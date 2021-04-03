@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/create_textmark_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/create_textmark_screen.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 import 'package:text_marks_the_spot_app/functionality/geolocation/geolocation.dart';
