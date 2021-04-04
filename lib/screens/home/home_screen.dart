@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +15,13 @@ import 'package:text_marks_the_spot_app/functionality/geolocation/geolocation.da
 import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
 
 class HomeScreen extends StatefulWidget {
-
   static const String id = 'home_screen';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>  {
-  
+class _HomeScreenState extends State<HomeScreen> {
   Widget buildTextmarkCreator(BuildContext context) {
     return Container();
   }
@@ -68,49 +64,49 @@ class _HomeScreenState extends State<HomeScreen>  {
               _initialPosition == null
                   ? CircularProgressIndicator()
                   : GoogleMap(
-                markers: _markers,
-                onLongPress: (LatLng coor) {
-                  setState(() {
-                    currentMarker == null
-                        ? print("no current")
-                        : _markers.remove(currentMarker);
-                    currentMarker = new Marker(
-                        markerId: MarkerId(coor.toString()),
-                        position: coor,
-                        onTap: () {
-                          print("eeeee $coor");
-                        },
-                        infoWindow: InfoWindow(
-                            title: "",
-                            snippet: "",
-                            onTap: () {
-                              print("eeeee $coor");
-                            }),
-                        icon: BitmapDescriptor.defaultMarkerWithHue(100));
-                  });
-                  currentGeoPoint =
-                  new GeoPoint(coor.latitude, coor.longitude);
-                  _markers.add(currentMarker);
-                },
-                // mapType: MapType.hybrid,
-                mapType: MapType.normal,
-                onCameraMove: (CameraPosition position) {
-                  setState(() {
-                    currentCenter = position.target;
-                  });
-                },
-                myLocationButtonEnabled: false,
-                compassEnabled: false,
-                initialCameraPosition: this.cameraPosition,
-                onMapCreated: (GoogleMapController controller) {
-                  _mapController = controller;
-                  getMarkers();
-                  setState(() {});
-                },
-              ),
+                      markers: _markers,
+                      onLongPress: (LatLng coor) {
+                        setState(() {
+                          currentMarker == null
+                              ? print("no current")
+                              : _markers.remove(currentMarker);
+                          currentMarker = new Marker(
+                              markerId: MarkerId(coor.toString()),
+                              position: coor,
+                              onTap: () {
+                                print("eeeee $coor");
+                              },
+                              infoWindow: InfoWindow(
+                                  title: "",
+                                  snippet: "",
+                                  onTap: () {
+                                    print("eeeee $coor");
+                                  }),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(100));
+                        });
+                        currentGeoPoint =
+                            new GeoPoint(coor.latitude, coor.longitude);
+                        _markers.add(currentMarker);
+                      },
+                      // mapType: MapType.hybrid,
+                      mapType: MapType.normal,
+                      onCameraMove: (CameraPosition position) {
+                        setState(() {
+                          currentCenter = position.target;
+                        });
+                      },
+                      myLocationButtonEnabled: false,
+                      compassEnabled: false,
+                      initialCameraPosition: this.cameraPosition,
+                      onMapCreated: (GoogleMapController controller) {
+                        _mapController = controller;
+                        getMarkers();
+                        setState(() {});
+                      },
+                    ),
               Padding(
                   padding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: SafeArea(
                     child: Column(
                       children: [
@@ -162,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                                 shape: CircleBorder(),
                                 onPressed: () {
                                   setLocation();
-                                }
-                                ),
+                                }),
                           ],
                         ),
                         Expanded(
@@ -191,7 +186,6 @@ class _HomeScreenState extends State<HomeScreen>  {
   }
 
   void setLocation() async {
-
     final result = await Navigator.push(
         context,
         MaterialPageRoute(
@@ -199,15 +193,12 @@ class _HomeScreenState extends State<HomeScreen>  {
         ));
 
     this.cameraPosition = CameraPosition(
-      target: LatLng(result.latitude,result.longitude ),
+      target: LatLng(result.latitude, result.longitude),
       zoom: 15.0,
     );
 
-    _mapController.moveCamera(
-        CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target: LatLng(result.latitude,result.longitude),
-                zoom: 15.0)));
+    _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(result.latitude, result.longitude), zoom: 15.0)));
 
     this.currentCenter = LatLng(this.latitude, this.longitude);
 
@@ -217,7 +208,6 @@ class _HomeScreenState extends State<HomeScreen>  {
   }
 
   void getLocation() async {
-
     var p = await determinePosition();
 
     this.latitude = p.latitude;
@@ -239,18 +229,21 @@ class _HomeScreenState extends State<HomeScreen>  {
 
     ImageConfiguration configuration = createLocalImageConfiguration(context);
 
-    BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(configuration, 'assets/image0.png');
+    BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(
+        configuration, 'assets/image0.png');
 
-    _markers.add(new Marker(markerId: new MarkerId("You"),
-        position: LatLng(latitude, longitude), onTap: (){
+    _markers.add(new Marker(
+        markerId: new MarkerId("You"),
+        position: LatLng(latitude, longitude),
+        onTap: () {
           print("OOOOOOOO");
         },
         infoWindow: InfoWindow(
             title: "You",
-            onTap: (){
+            onTap: () {
               print("OOOOOppppp");
-            }
-        ),icon: BitmapDescriptor.defaultMarkerWithHue(50)));
+            }),
+        icon: BitmapDescriptor.defaultMarkerWithHue(50)));
   }
 
   void getMarkers() async {
@@ -270,39 +263,52 @@ class _HomeScreenState extends State<HomeScreen>  {
     QueryDocumentSnapshot user;
 
     firestoreTextMarks.docs.forEach((map) {
-      if(map.data().containsValue(loggedInUser.uid)) {
+      if (map.data().containsValue(loggedInUser.uid)) {
         g = map["coordinates"];
         if (map["senderUID"] == loggedInUser.uid) {
-          id = "Sent/" + loggedInUser.uid + "/" + g.latitude.toString() + "/" + g.longitude.toString();
+          id = "Sent/" +
+              loggedInUser.uid +
+              "/" +
+              g.latitude.toString() +
+              "/" +
+              g.longitude.toString();
           hue = 240;
-          user = firestoreUsers.docs.firstWhere((element) => element.id.toString() == map["recipientUID"]);
-        }
-        else if (map["recipientUID"] == loggedInUser.uid) {
-          id = "Received/" + loggedInUser.uid + "/" + g.latitude.toString() + "/" + g.longitude.toString();
+          user = firestoreUsers.docs.firstWhere(
+              (element) => element.id.toString() == map["recipientUID"]);
+        } else if (map["recipientUID"] == loggedInUser.uid) {
+          id = "Received/" +
+              loggedInUser.uid +
+              "/" +
+              g.latitude.toString() +
+              "/" +
+              g.longitude.toString();
           hue = 0;
-          user = firestoreUsers.docs.firstWhere((element) => element.id.toString() == map["senderUID"]);
+          user = firestoreUsers.docs.firstWhere(
+              (element) => element.id.toString() == map["senderUID"]);
         }
 
         BitmapDescriptor b;
 
         BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(12, 12)),
-            'fonts/MyFlutterApp.ttf')
+                'fonts/MyFlutterApp.ttf')
             .then((d) {
           b = d;
         });
 
-
-        _markers.add(new Marker(markerId: new MarkerId(id),
-            position: LatLng(g.latitude, g.longitude), onTap: (){
+        _markers.add(new Marker(
+            markerId: new MarkerId(id),
+            position: LatLng(g.latitude, g.longitude),
+            onTap: () {
               print("OOOOOOOO");
             },
             infoWindow: InfoWindow(
                 title: map["locationNickname"],
-                snippet: user["username"], //user that sends or receives the textmark
-                onTap: (){
+                snippet:
+                    user["username"], //user that sends or receives the textmark
+                onTap: () {
                   print("OOOOOOOO");
-                }
-            ),icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
+                }),
+            icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
         setState(() {
           // print(_markers);
         });

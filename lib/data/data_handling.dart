@@ -104,4 +104,8 @@ class DataHandling {
             'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}, ${coordinates.latitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
         .catchError((e) => print('Failed to save Textmark.'));
   }
+
+  Future<void> deleteTextMark(String textmarkID) {
+    return textmarks.doc(textmarkID).delete();
+  }
 }
