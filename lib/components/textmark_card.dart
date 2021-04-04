@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 class TextmarkCard extends StatelessWidget {
@@ -26,15 +27,13 @@ class TextmarkCard extends StatelessWidget {
             fontSize: 22.0,
           ),
         ),
-        title: (isSender)
-            ? Text("Textmark sent to $username")
-            : Text("Textmark from $username"),
-        subtitle: Text(locationNickname),
+        title: Text("$locationNickname"),
+        subtitle: Text(username),
         trailing: Icon(Icons.more_vert),
         onTap: () {
-          Navigator.pushNamed(context, HomeScreen.id);
+          Navigator.pop(context, this.coordinates);
           // TODO: Pass coordinates to Map display & display Textmark pin
-          print(['${coordinates.latitude},${coordinates.longitude}']);
+         // print(['${coordinates.latitude},${coordinates.longitude}']);
         },
       ),
     );

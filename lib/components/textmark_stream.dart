@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/textmark_card.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 
-final User currentUser = FirebaseAuth.instance.currentUser;
 CollectionReference textmarks = DataHandling().textmarks;
 CollectionReference users = DataHandling().users;
 
@@ -26,6 +25,7 @@ class TextmarksStream extends StatelessWidget {
           );
         }
         final textmarksDocs = snapshot.data.docs;
+        User currentUser = FirebaseAuth.instance.currentUser;
         List<TextmarkCard> textmarkCards = [];
 
         for (var textmark in textmarksDocs) {
@@ -42,7 +42,7 @@ class TextmarksStream extends StatelessWidget {
             final textmarkCard = TextmarkCard(
               date: date,
               username: externalUser,
-              isSender: (isSentStream) ? true : false,
+              isSender: isSentStream,
               locationNickname: locationNickname,
               coordinates: coordinates,
             );
