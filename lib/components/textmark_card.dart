@@ -22,8 +22,8 @@ class TextmarkCard extends StatelessWidget {
 
   _confirmTextmarkDeletion(BuildContext context, String tmNickname) {
     var baseDialog = CustomAlertDialog(
-        title: "Delete Textmark:",
-        content: "Are you sure you would like to delete $tmNickname?",
+        title: "Delete Textmark",
+        content: 'Are you sure you would like to delete "$tmNickname"?',
         confirmOnPressed: () {
           DataHandling().deleteTextMark(textmarkID);
           Navigator.pop(context);

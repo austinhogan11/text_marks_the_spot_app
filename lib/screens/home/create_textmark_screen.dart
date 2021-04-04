@@ -52,7 +52,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 10.0, 0, 20.0),
                   child: Text(
-                    'Create a Text Mark:',
+                    'Create a Text Mark',
                     style: TextStyle(
                       fontSize: 25.0,
                       color: Colors.white,
@@ -126,8 +126,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                         textMarkRecipientUsername,
                         widget.coordinates,
                         textMarkNickname,
-                        textMarkMessage),
-                    Navigator.pushNamed(context, HomeScreen.id),
+                        textMarkMessage).then((value) => Navigator.pop(context, "Sent")),
                   },
                 )
               ],

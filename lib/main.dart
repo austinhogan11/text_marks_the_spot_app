@@ -10,6 +10,7 @@ import 'package:text_marks_the_spot_app/screens/account_settings/location_servic
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
 import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/show_textmark_message.dart';
 import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
 
 import 'functionality/authentication/apple_sign_in_available.dart';
