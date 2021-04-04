@@ -120,13 +120,15 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   color: Colors.white,
                   textColor: kPrimaryColor,
                   onTap: () => {
-                    DataHandling().saveTextMark(
-                        textmarkDate,
-                        currentUser.uid,
-                        textMarkRecipientUsername,
-                        widget.coordinates,
-                        textMarkNickname,
-                        textMarkMessage).then((value) => Navigator.pop(context, "Sent")),
+                    DataHandling()
+                        .saveTextMark(
+                            textmarkDate,
+                            currentUser.uid,
+                            textMarkRecipientUsername,
+                            widget.coordinates,
+                            textMarkNickname,
+                            textMarkMessage)
+                        .then((value) => Navigator.pop(context, "Sent")),
                   },
                 )
               ],

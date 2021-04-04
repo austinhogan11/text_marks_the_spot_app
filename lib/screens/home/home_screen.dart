@@ -38,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
   double longitude = 0;
   double currentZoom = 15;
   CameraPosition cameraPosition;
-  bool textmarkSent = false;
   var _mapController;
   List<String> sentTMNicknames;
 
@@ -73,13 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? print("no current")
                               : _markers.remove(currentMarker);
                           this.currentGeoPoint =
-                          new GeoPoint(coor.latitude, coor.longitude);
+                              new GeoPoint(coor.latitude, coor.longitude);
                           currentMarker = new Marker(
                               markerId: MarkerId("currentMarker"),
                               position: coor,
                               infoWindow: InfoWindow(
-                                  title: "",
-                                  snippet: "",),
+                                title: "",
+                                snippet: "",
+                              ),
                               icon: BitmapDescriptor.defaultMarkerWithHue(100));
                         });
                         _markers.add(currentMarker);
@@ -167,13 +167,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () async {
                             String test = await showModalBottomSheet<String>(
                               context: context,
-                              builder: (context) => CreateTextMark(coordinates: this.currentGeoPoint),
+                              builder: (context) => CreateTextMark(
+                                  coordinates: this.currentGeoPoint),
                             );
-                            if(test != null){
+                            if (test != null) {
                               _markers.remove(this.currentMarker);
                               this.currentMarker = null;
-                            //  setState(() {
-                                getMarkers();
+                              //  setState(() {
+                              getMarkers();
                               //});
                             }
                           },
@@ -187,13 +188,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void setLocation() async {
-
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => TextmarksPageView(),
         )).then((result) {
-
       getMarkers();
 
       this.cameraPosition = CameraPosition(
@@ -206,12 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
       this.currentCenter = LatLng(this.latitude, this.longitude);
 
-      setState(() { _initialPosition = LatLng(this.latitude, this.longitude);});
+      setState(() {
+        _initialPosition = LatLng(this.latitude, this.longitude);
+      });
     });
   }
 
   void getLocation() async {
-
     var p = await determinePosition();
 
     this.latitude = p.latitude;
@@ -239,15 +239,13 @@ class _HomeScreenState extends State<HomeScreen> {
     this.You = new Marker(
         markerId: new MarkerId("You"),
         position: LatLng(latitude, longitude),
-        infoWindow: InfoWindow(
-            title: "You"),
+        infoWindow: InfoWindow(title: "You"),
         icon: BitmapDescriptor.defaultMarkerWithHue(50));
 
     _markers.add(You);
   }
 
   void getMarkers() async {
-
     final User loggedInUser = _auth.currentUser;
 
     CollectionReference textmarks = DataHandling().textmarks;
@@ -271,7 +269,8 @@ class _HomeScreenState extends State<HomeScreen> {
               "/" +
               g.longitude.toString();
           hue = 240;
-          snippet = "Sent to ${map["recipientUsername"]} on ${map["textmarkDate"]}";
+          snippet =
+              "Sent to ${map["recipientUsername"]} on ${map["textmarkDate"]}";
           user = map["recipientUsername"];
         } else if (map["recipientUID"] == loggedInUser.uid) {
           id = "Received/" +
@@ -281,7 +280,8 @@ class _HomeScreenState extends State<HomeScreen> {
               "/" +
               g.longitude.toString();
           hue = 0;
-          snippet = "Sent by ${map["senderUsername"]} on ${map["textmarkDate"]}";
+          snippet =
+              "Sent by ${map["senderUsername"]} on ${map["textmarkDate"]}";
           user = map["senderUsername"];
         }
 
@@ -296,16 +296,15 @@ class _HomeScreenState extends State<HomeScreen> {
         newMarkers.add(new Marker(
             markerId: new MarkerId(id),
             position: LatLng(g.latitude, g.longitude),
-            onTap: () {
-            },
+            onTap: () {},
             infoWindow: InfoWindow(
                 title: map["locationNickname"],
-                snippet:
-                    user, //user that sends or receives the textmark
+                snippet: user, //user that sends or receives the textmark
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
-                    builder: (BuildContext context) => ShowMessage(g, map["locationNickname"], map["message"], snippet),
+                    builder: (BuildContext context) => ShowMessage(
+                        g, map["locationNickname"], map["message"], snippet),
                   );
                 }),
             icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
@@ -313,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     newMarkers.add(this.You);
-    if(this.currentMarker != null){
+    if (this.currentMarker != null) {
       newMarkers.add(this.currentMarker);
     }
     this._markers = newMarkers;

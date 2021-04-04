@@ -16,7 +16,8 @@ class ShowMessage extends StatefulWidget {
   final String textMarkNickname;
   final String textMarkMessage;
 
-  const ShowMessage(this.currentLocation, this.textMarkNickname, this.textMarkMessage, this.textMarkSenderUsername);
+  const ShowMessage(this.currentLocation, this.textMarkNickname,
+      this.textMarkMessage, this.textMarkSenderUsername);
 
   @override
   _ShowMessageState createState() => _ShowMessageState();
@@ -118,7 +119,7 @@ class _RadiusSliderState extends State<RadiusSlider> {
       label: '${radiusValue.toString()}mi',
       onChanged: (updatedRadius) {
         setState(
-              () {
+          () {
             radiusValue = updatedRadius;
           },
         );
