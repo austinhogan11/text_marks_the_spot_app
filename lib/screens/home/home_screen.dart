@@ -167,9 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () async {
                             String test = await showModalBottomSheet<String>(
                               context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
                               builder: (context) => CreateTextMark(
                                   coordinates: this.currentGeoPoint),
                             );
+
                             if (test != null) {
                               _markers.remove(this.currentMarker);
                               this.currentMarker = null;

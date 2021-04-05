@@ -33,106 +33,114 @@ class _CreateTextMarkState extends State<CreateTextMark> {
   String textMarkNickname;
   String textMarkMessage;
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Color(0xFF757575),
-        child: Container(
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              topRight: Radius.circular(15.0),
-            ),
+    return Container(
+      height: (MediaQuery.of(context).size.height > 850.0)
+          ? MediaQuery.of(context).size.height * .75
+          : MediaQuery.of(context).size.height * .85,
+      color: Color(0xFF757575),
+      child: Container(
+        decoration: BoxDecoration(
+          color: kPrimaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0),
+            topRight: Radius.circular(15.0),
           ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
-            // padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 30.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10.0, 0, 20.0),
-                  child: Text(
-                    'Create a Text Mark',
+        ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
+          // padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 30.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+                child: Text(
+                  'Create a Text Mark',
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // RadiusSlider(),
+                  TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 25.0,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // RadiusSlider(),
-                        TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: 'nickname',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          onChanged: (value) => textMarkNickname = value,
-                        ),
-                        TextField(
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: 'recipient username',
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            onChanged: (value) => {
-                                  textMarkRecipientUsername = value,
-                                }),
-                        TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            hintText: 'Message',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          onChanged: (value) => textMarkMessage = value,
-                        ),
-                      ],
+                    decoration: InputDecoration(
+                      hintText: 'nickname',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
+                    onChanged: (value) => textMarkNickname = value,
                   ),
-                ),
-                CustomButton(
-                  btnText: 'Send',
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  textColor: kPrimaryColor,
-                  onTap: () => {
-                    DataHandling()
-                        .saveTextMark(
-                            textmarkDate,
-                            currentUser.uid,
-                            textMarkRecipientUsername,
-                            widget.coordinates,
-                            textMarkNickname,
-                            textMarkMessage)
-                        .then((value) => Navigator.pop(context, "Sent")),
-                  },
-                )
-              ],
-            ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'recipient username',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      onChanged: (value) => {
+                            textMarkRecipientUsername = value,
+                          }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      hintText: 'Message',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    onChanged: (value) => textMarkMessage = value,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                    btnText: 'Send',
+                    fontSize: 15.0,
+                    color: Colors.white,
+                    textColor: kPrimaryColor,
+                    onTap: () => {
+                      DataHandling()
+                          .saveTextMark(
+                              textmarkDate,
+                              currentUser.uid,
+                              textMarkRecipientUsername,
+                              widget.coordinates,
+                              textMarkNickname,
+                              textMarkMessage)
+                          .then(
+                            (value) => Navigator.pop(context, "Sent"),
+                          ),
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

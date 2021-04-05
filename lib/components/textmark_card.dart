@@ -51,7 +51,6 @@ class TextmarkCard extends StatelessWidget {
           Navigator.pop(context, this.coordinates);
         },
         onLongPress: () => _confirmTextmarkDeletion(context, locationNickname),
-        // TODO: Update Markers when deleting
       ),
     );
   }
