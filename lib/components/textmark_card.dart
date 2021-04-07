@@ -5,7 +5,9 @@ import 'package:text_marks_the_spot_app/data/data_handling.dart';
 
 class TextmarkCard extends StatelessWidget {
   final String textmarkID;
-  final String date;
+  final Timestamp creationDate;
+  final Timestamp expirationDate;
+  final String dateLabel;
   final String username;
   final bool isSender;
   final String locationNickname;
@@ -13,7 +15,9 @@ class TextmarkCard extends StatelessWidget {
 
   TextmarkCard({
     this.textmarkID,
-    this.date,
+    this.dateLabel,
+    this.creationDate,
+    this.expirationDate,
     this.username,
     this.isSender,
     this.locationNickname,
@@ -39,7 +43,7 @@ class TextmarkCard extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Text(
-          date,
+          dateLabel,
           style: TextStyle(
             fontSize: 22.0,
           ),

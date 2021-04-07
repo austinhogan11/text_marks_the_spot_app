@@ -33,20 +33,19 @@ class TextmarksStream extends StatelessWidget {
               (isSentStream) ? textmark['senderUID'] : textmark['recipientUID'];
 
           if (user == currentUser.uid) {
-            final textmarkID = textmark.id;
-            final date = textmark['textmarkDate'];
-            final externalUser = (isSentStream)
-                ? textmark['recipientUsername']
-                : textmark['senderUsername'];
-            final locationNickname = textmark['locationNickname'];
-            final coordinates = textmark['coordinates'];
+            final creationDate = textmark['creationDate'];
+            final expirationDate = textmark['expirationDate'];
             final textmarkCard = TextmarkCard(
-              textmarkID: textmarkID,
-              date: date,
-              username: externalUser,
+              textmarkID: textmark.id,
+              dateLabel: textmark['dateLabel'],
+              creationDate: creationDate,
+              expirationDate: expirationDate,
+              username: (isSentStream)
+                  ? textmark['recipientUsername']
+                  : textmark['senderUsername'],
               isSender: isSentStream,
-              locationNickname: locationNickname,
-              coordinates: coordinates,
+              locationNickname: textmark['locationNickname'],
+              coordinates: textmark['coordinates'],
             );
             textmarkCards.add(textmarkCard);
           }

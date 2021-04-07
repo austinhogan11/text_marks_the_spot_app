@@ -17,15 +17,15 @@ class CreateTextMark extends StatefulWidget {
   _CreateTextMarkState createState() => _CreateTextMarkState();
 }
 
-var currentDate;
-String textmarkDate;
+var creationDate;
+var expirationDate;
+String _expirationOption;
+String textmarkDateLabel;
 
 class _CreateTextMarkState extends State<CreateTextMark> {
   @override
   void initState() {
     super.initState();
-    currentDate = DateTime.now();
-    textmarkDate = currentDate.toString().substring(5, 10);
   }
 
   @override
@@ -35,9 +35,9 @@ class _CreateTextMarkState extends State<CreateTextMark> {
   Widget build(BuildContext context) {
     return Container(
       height: (MediaQuery.of(context).size.height > 850.0)
-          ? MediaQuery.of(context).size.height * .75
+          ? MediaQuery.of(context).size.height * .76
           : MediaQuery.of(context).size.height * .85,
-      color: Color(0xFF757575),
+      color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
           color: kPrimaryColor,
@@ -52,7 +52,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+                padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0.0),
                 child: Text(
                   'Create a Text Mark',
                   style: TextStyle(
@@ -81,7 +81,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     onChanged: (value) => textMarkNickname = value,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   TextField(
                       textAlign: TextAlign.center,
@@ -98,7 +98,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                             textMarkRecipientUsername = value,
                           }),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   TextField(
                     textAlign: TextAlign.center,
@@ -117,7 +117,11 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     onChanged: (value) => textMarkMessage = value,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 5,
+                  ),
+                  ExpirationDropdown(),
+                  SizedBox(
+                    height: 5,
                   ),
                   CustomButton(
                     btnText: 'Send',
@@ -125,9 +129,30 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     color: Colors.white,
                     textColor: kPrimaryColor,
                     onTap: () => {
+                      creationDate = DateTime.now(),
+                      textmarkDateLabel =
+                          creationDate.toString().substring(5, 10),
+                      if (_expirationOption == '30 days')
+                        {
+                          expirationDate =
+                              creationDate.add(new Duration(days: 30)),
+                        }
+                      else if (_expirationOption == '1 year')
+                        {
+                          expirationDate =
+                              creationDate.add(new Duration(days: 365)),
+                        }
+                      else
+                        {
+                          expirationDate = null,
+                        },
+                      print(
+                          "Current Date: $creationDate\n ExpirationDate: $expirationDate"),
                       DataHandling()
                           .saveTextMark(
-                              textmarkDate,
+                              creationDate,
+                              expirationDate,
+                              textmarkDateLabel,
                               currentUser.uid,
                               textMarkRecipientUsername,
                               widget.coordinates,
@@ -154,7 +179,7 @@ class RadiusSlider extends StatefulWidget {
 }
 
 class _RadiusSliderState extends State<RadiusSlider> {
-  double radiusValue = 0.5;
+  double radiusValue = 0.0;
   @override
   Widget build(BuildContext context) {
     return Slider(
@@ -171,6 +196,56 @@ class _RadiusSliderState extends State<RadiusSlider> {
             radiusValue = updatedRadius;
           },
         );
+      },
+    );
+  }
+}
+
+class ExpirationDropdown extends StatefulWidget {
+  @override
+  _ExpirationDropdownState createState() => _ExpirationDropdownState();
+}
+
+class _ExpirationDropdownState extends State<ExpirationDropdown> {
+  // String _chosenValue;
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      isExpanded: true,
+      focusColor: Colors.white,
+      dropdownColor: kAccentColor,
+      value: _expirationOption,
+      elevation: 5,
+      style: TextStyle(color: Colors.white),
+      iconEnabledColor: Colors.white,
+      items: <String>[
+        'No Expiration',
+        '30 days',
+        '1 year',
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Center(
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      }).toList(),
+      hint: Center(
+        child: Text(
+          "Choose a message duration",
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 15,
+          ),
+        ),
+      ),
+      onChanged: (String value) {
+        setState(() {
+          _expirationOption = value;
+        });
       },
     );
   }
