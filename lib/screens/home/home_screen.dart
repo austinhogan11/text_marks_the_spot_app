@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
               g.longitude.toString();
           hue = 240;
           snippet =
-              "Sent to ${map["recipientUsername"]} on ${map["textmarkDate"]}";
+              "Sent to ${map["recipientUsername"]} on ${map["dateLabel"]}";
           user = map["recipientUsername"];
         } else if (map["recipientUID"] == loggedInUser.uid) {
           id = "Received/" +
@@ -283,8 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
               "/" +
               g.longitude.toString();
           hue = 0;
-          snippet =
-              "Sent by ${map["senderUsername"]} on ${map["textmarkDate"]}";
+          snippet = "Sent by ${map["senderUsername"]} on ${map["dateLabel"]}";
           user = map["senderUsername"];
         }
 
