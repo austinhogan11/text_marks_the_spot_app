@@ -38,9 +38,9 @@ class TextMarksTheSpot extends StatelessWidget {
         title: 'Text Marks the Spot',
 
         // Application Screen Navigation set up
-        // initialRoute: LoginScreen.id,
+        initialRoute: LoginScreen.id,
         // initialRoute: TextmarksPageView.id,
-        initialRoute: HomeScreen.id,
+        // initialRoute: HomeScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),
