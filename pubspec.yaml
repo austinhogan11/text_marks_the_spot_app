@@ -41,7 +41,7 @@ dependencies:
 
   # Sign in with Apple Authentication
   apple_sign_in: ^0.1.0
-  provider: ^4.3.3
+  provider: ^5.0.0
 
   # Profanity filter package for username creation
   profanity_filter: ^1.0.4
