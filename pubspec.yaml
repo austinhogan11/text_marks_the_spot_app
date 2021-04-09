@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   geolocator: ^6.2.1
+#  geolocator: ^7.0.1
   flutter_map:
   google_maps_flutter: ^0.5.27+3
 
@@ -50,7 +51,8 @@ dev_dependencies:
     sdk: flutter
 
   # Splash Screen Related Package
-  flutter_native_splash: ^0.3.0
+#  flutter_native_splash: ^0.3.0
+  flutter_native_splash: ^1.1.7+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
