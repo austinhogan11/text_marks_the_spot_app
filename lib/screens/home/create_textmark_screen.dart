@@ -36,7 +36,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
     return Container(
       height: (MediaQuery.of(context).size.height > 850.0)
           ? MediaQuery.of(context).size.height * .76
-          : MediaQuery.of(context).size.height * .85,
+          : MediaQuery.of(context).size.height * .65,
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
@@ -67,7 +67,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                 children: [
                   // RadiusSlider(),
                   TextField(
-                    autofocus: true,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
