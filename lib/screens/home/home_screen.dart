@@ -198,19 +198,21 @@ class _HomeScreenState extends State<HomeScreen> {
         )).then((result) {
       getMarkers();
 
-      this.cameraPosition = CameraPosition(
-        target: LatLng(result.latitude, result.longitude),
-        zoom: 15.0,
-      );
+      if (result != null) {
+        this.cameraPosition = CameraPosition(
+          target: LatLng(result.latitude, result.longitude),
+          zoom: 15.0,
+        );
 
-      _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
-          target: LatLng(result.latitude, result.longitude), zoom: 15.0)));
+        _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+            target: LatLng(result.latitude, result.longitude), zoom: 15.0)));
 
-      this.currentCenter = LatLng(this.latitude, this.longitude);
+        this.currentCenter = LatLng(this.latitude, this.longitude);
 
-      setState(() {
-        _initialPosition = LatLng(this.latitude, this.longitude);
-      });
+        setState(() {
+          _initialPosition = LatLng(this.latitude, this.longitude);
+        });
+      }
     });
   }
 
