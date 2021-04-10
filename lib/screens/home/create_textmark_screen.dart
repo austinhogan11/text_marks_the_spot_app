@@ -35,8 +35,8 @@ class _CreateTextMarkState extends State<CreateTextMark> {
   Widget build(BuildContext context) {
     return Container(
       height: (MediaQuery.of(context).size.height > 850.0)
-          ? MediaQuery.of(context).size.height * .76
-          : MediaQuery.of(context).size.height * .65,
+          ? MediaQuery.of(context).size.height * .48
+          : MediaQuery.of(context).size.height * .53,
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     onChanged: (value) => textMarkNickname = value,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   TextField(
                       textAlign: TextAlign.center,
@@ -97,7 +97,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                             textMarkRecipientUsername = value,
                           }),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextField(
                     textAlign: TextAlign.center,
@@ -116,11 +116,11 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     onChanged: (value) => textMarkMessage = value,
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 20,
                   ),
                   ExpirationDropdown(),
                   SizedBox(
-                    height: 5,
+                    height: 25,
                   ),
                   CustomButton(
                     btnText: 'Send',
@@ -143,7 +143,8 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                         }
                       else
                         {
-                          expirationDate = null,
+                          expirationDate =
+                              creationDate.add(new Duration(days: 36500)),
                         },
                       print(
                           "Current Date: $creationDate\n ExpirationDate: $expirationDate"),

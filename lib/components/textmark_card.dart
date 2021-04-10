@@ -5,8 +5,8 @@ import 'package:text_marks_the_spot_app/data/data_handling.dart';
 
 class TextmarkCard extends StatelessWidget {
   final String textmarkID;
-  final Timestamp creationDate;
-  final Timestamp expirationDate;
+  final DateTime creationDate;
+  final DateTime expirationDate;
   final String dateLabel;
   final String username;
   final bool isSender;
