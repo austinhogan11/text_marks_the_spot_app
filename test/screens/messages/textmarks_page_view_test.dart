@@ -1,17 +1,28 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
+import '../../firebase_mock.dart';
 
 void main() {
-  testWidgets('Test successful build of textmarks_page_view widget',
+  setupFirebaseAuthMocks();
+  setUpAll(() async {
+    await Firebase.initializeApp();
+  });
+  Widget createWidgetForTesting({Widget child}) {
+    return MaterialApp(
+      home: child,
+    );
+  }
+
+  testWidgets(
+      'Testing for successful creation of main TextmarksPageView Widget',
       (WidgetTester tester) async {
-    // TODO: Implement test
-    // Create the widget by telling the tester to build it
-    await tester.pumpWidget(TextmarksPageView());
+    await tester
+        .pumpWidget(createWidgetForTesting(child: new TextmarksPageView()));
 
-    //create the finders
-    final idFinder = find.text('textmarks_page_view');
+    final typeFinder = find.byType(TextmarksPageView);
 
-    expect(idFinder, findsOneWidget);
+    expect(typeFinder, findsOneWidget);
   });
 }
