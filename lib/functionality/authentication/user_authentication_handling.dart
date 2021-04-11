@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_authentication.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 import 'google_authentication.dart';
 
@@ -28,7 +28,6 @@ Future<void> signInWithAppleHandling(BuildContext context) async {
         .signInWithApple(scopes: [Scope.email, Scope.fullName]);
     authenticationScreenRouting(context, isNewUser);
   } catch (e) {
-    // TODO: Show alert here
     print(e);
   }
 }

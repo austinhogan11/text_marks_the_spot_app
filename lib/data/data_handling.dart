@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:text_marks_the_spot_app/screens/home/create_textmark_screen.dart';
 
 /*
   Data Handling Class for the users collection in Firestore
@@ -61,12 +61,20 @@ class DataHandling {
     return false;
   }
 
-  Future<void> saveTextMark(String recipientUsername, GeoPoint coordinates,
-      String locationNickname, String messageContents) async {
+  Future<void> saveTextMark(
+      DateTime creationDate,
+      DateTime expirationDate,
+      String dateLabel,
+      String senderUID,
+      String recipientUsername,
+      GeoPoint coordinates,
+      String locationNickname,
+      String messageContents) async {
     final User loggedInUser = _auth.currentUser;
 
     //Gets the uid of the entered username for the recipient
     String recipientUID;
+    String senderUsername;
     await users.get().then((QuerySnapshot querySnapshot) => {
           querySnapshot.docs.forEach((doc) {
             if (recipientUsername == doc['username']) {
@@ -76,21 +84,33 @@ class DataHandling {
               recipientUID = doc.id;
               print(recipientUID);
             }
+
+            if (senderUID == doc.id) {
+              senderUsername = doc['username'];
+            }
           })
         });
 
     //Creates a new textmark document
     textmarks
         .add({
+          'creationDate': creationDate,
+          'expirationDate': expirationDate,
+          'dateLabel': dateLabel,
           'senderUID': loggedInUser.uid,
+          'senderUsername': senderUsername,
           'recipientUID': recipientUID,
-          'address': "not yet",
+          'recipientUsername': recipientUsername,
           'coordinates': coordinates,
           'locationNickname': locationNickname,
           'message': messageContents,
         })
         .then((value) => print(
-            'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
+            'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}, ${coordinates.latitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
         .catchError((e) => print('Failed to save Textmark.'));
+  }
+
+  Future<void> deleteTextMark(String textmarkID) {
+    return textmarks.doc(textmarkID).delete();
   }
 }

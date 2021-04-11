@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/apple_authentication.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
@@ -9,9 +10,9 @@ import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dar
 import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/sign_up_screen.dart';
-import 'package:text_marks_the_spot_app/screens/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
+import 'package:text_marks_the_spot_app/screens/home/show_textmark_message.dart';
 import 'package:text_marks_the_spot_app/screens/messages/textmarks_page_view.dart';
-import 'package:text_marks_the_spot_app/screens/messages/received_textmarks_screen.dart';
 
 import 'functionality/authentication/apple_sign_in_available.dart';
 
@@ -21,12 +22,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final appleSignInAvailable = await AppleSignInAvailable.check();
-  runApp(
-    Provider<AppleSignInAvailable>.value(
-      value: appleSignInAvailable,
-      child: TextMarksTheSpot(),
-    ),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(
+            Provider<AppleSignInAvailable>.value(
+              value: appleSignInAvailable,
+              child: TextMarksTheSpot(),
+            ),
+          ));
 }
 
 class TextMarksTheSpot extends StatelessWidget {
