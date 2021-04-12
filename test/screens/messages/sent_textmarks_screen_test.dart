@@ -17,7 +17,6 @@ void main() {
 
   testWidgets('Testing for successful creation of SentTextmarksScreen Widget',
       (WidgetTester tester) async {
-    // TODO: Implement test
     await tester
         .pumpWidget(createWidgetForTesting(child: new SentTextmarksScreen()));
 

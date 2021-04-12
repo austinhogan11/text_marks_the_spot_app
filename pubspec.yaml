@@ -55,6 +55,7 @@ dev_dependencies:
   google_sign_in_mocks: ^0.2.0
   firebase_auth_mocks: ^0.6.0
   rxdart:
+  build_runner: ^1.12.2
   # flutter_automation: any
 
   # Splash Screen Related Package
