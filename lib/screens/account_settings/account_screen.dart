@@ -65,25 +65,29 @@ class _AccountScreenState extends State<AccountScreen> {
                   username == null ? '' : username,
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
+                    color: grn,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               SettingsButton(
                 btnText: 'Change Username',
+                color: grn,
                 screenNavRoute: ChangeUserNameScreen.id,
               ),
               SettingsButton(
                 btnText: 'Location Services',
+                color: grn,
                 screenNavRoute: LocationServicesScreen.id,
               ),
               SettingsButton(
                 btnText: 'Help',
+                color: grn,
                 screenNavRoute: HelpScreen.id,
               ),
               SettingsButton(
                 btnText: 'Logout',
+                color: grn,
                 screenNavRoute: LoginScreen.id,
               ),
             ],

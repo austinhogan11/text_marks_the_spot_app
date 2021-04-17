@@ -39,7 +39,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                 'Enter a new username:',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.white,
+                  color: DrkGrn,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -49,7 +49,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: grn,
                 ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -57,7 +57,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                   ),
                   hintText: 'Username',
                   hintStyle: TextStyle(
-                    color: Colors.grey,
+                    color: grn,
                   ),
                 ),
                 onChanged: (value) => newUsername = value,
@@ -66,7 +66,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                 height: 15.0,
               ),
               FlatButton(
-                color: kPrimaryColor,
+                color: DrkGrn,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40.0),
                 ),
@@ -74,7 +74,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                   'Change',
                   style: TextStyle(
                     fontSize: 18.0,
-                    color: Colors.white,
+                    color: grn,
                   ),
                 ),
                 onPressed: () {

@@ -57,7 +57,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   'Create a Text Mark',
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: Colors.white,
+                    color: MedGrn,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -74,7 +74,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     decoration: InputDecoration(
                       hintText: 'nickname',
                       hintStyle: TextStyle(
-                        color: Colors.grey,
+                        color: grn,
                       ),
                     ),
                     onChanged: (value) => textMarkNickname = value,
@@ -85,12 +85,12 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: grn,
                       ),
                       decoration: InputDecoration(
                         hintText: 'recipient username',
                         hintStyle: TextStyle(
-                          color: Colors.grey,
+                          color: grn,
                         ),
                       ),
                       onChanged: (value) => {
@@ -102,7 +102,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: grn,
                     ),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -110,7 +110,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                       ),
                       hintText: 'Message',
                       hintStyle: TextStyle(
-                        color: Colors.grey,
+                        color: grn,
                       ),
                     ),
                     onChanged: (value) => textMarkMessage = value,
@@ -125,8 +125,8 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   CustomButton(
                     btnText: 'Send',
                     fontSize: 15.0,
-                    color: Colors.white,
-                    textColor: kPrimaryColor,
+                    color: KIconFill,
+                    textColor: grn,
                     onTap: () => {
                       creationDate = DateTime.now(),
                       textmarkDateLabel =
@@ -212,12 +212,12 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       isExpanded: true,
-      focusColor: Colors.white,
+      focusColor: grn,
       dropdownColor: kAccentColor,
       value: _expirationOption,
       elevation: 5,
-      style: TextStyle(color: Colors.white),
-      iconEnabledColor: Colors.white,
+      style: TextStyle(color: grn),
+      iconEnabledColor: grn,
       items: <String>[
         'No Expiration',
         '30 days',
@@ -228,7 +228,7 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
           child: Center(
             child: Text(
               value,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: grn),
             ),
           ),
         );
@@ -237,7 +237,7 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
         child: Text(
           "Choose a message duration",
           style: TextStyle(
-            color: Colors.grey,
+            color: grn,
             fontSize: 15,
           ),
         ),

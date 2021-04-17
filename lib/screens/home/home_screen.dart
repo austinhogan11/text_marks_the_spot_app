@@ -41,6 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
   var _mapController;
   List<String> sentTMNicknames;
 
+
+
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Home',
+        title: "home",
         icon: kSettingsIconButton,
         iconFunction: () => Navigator.pushNamed(context, AccountScreen.id),
       ),
@@ -113,13 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               RawMaterialButton(
                                 elevation: 2.0,
                                 // fillColor: Colors.teal,
-                                fillColor: kPrimaryColor,
+                                fillColor: KIconFill,
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Icon(
                                     Icons.location_searching_sharp,
                                     size: 45.0,
-                                    color: Colors.white,
+                                    color: grn,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -141,13 +144,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             RawMaterialButton(
                                 elevation: 2.0,
-                                fillColor: kPrimaryColor,
+                                fillColor: KIconFill,
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Icon(
                                     Icons.message_sharp,
                                     size: 45.0,
-                                    color: Colors.white,
+                                    color: grn,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -161,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         CustomButton(
                           color: kPrimaryColor,
-                          textColor: Colors.white,
+                          textColor: MedGrn,
                           btnText: 'Create a Text Mark',
                           fontSize: 22.5,
                           onTap: () async {
