@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Primary app color used throughout the interface
 const Color kPrimaryColor = Color(0xff222831);
 
-const Color kAccentColor = Color(0xff393e46);
+const Color kAccentColor = Color(0xff393E46);
 
 const Color KIconFill = Color(0xff05386B);
 
@@ -21,10 +21,8 @@ const Icon kBackIconButton = Icon(
 const Icon kSettingsIconButton = Icon(
   Icons.settings,
   size: 30.0,
-  color: grn,
+  color: Colors.white,
 );
-
-
 
 const TextStyle kTextMarkTextStyleBold = TextStyle(
   color: Colors.blue,

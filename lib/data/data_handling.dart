@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:text_marks_the_spot_app/screens/home/create_textmark_screen.dart';
 
 /*
   Data Handling Class for the users collection in Firestore

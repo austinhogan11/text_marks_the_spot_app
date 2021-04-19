@@ -1,5 +1,3 @@
-import 'dart:math' as Math;
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static LatLng _initialPosition;
   Set<Marker> _markers = new Set<Marker>();
+  Set<Circle> _circles = new Set<Circle>();
   Marker currentMarker;
-  Marker You;
+  Circle youCircle;
+  Marker you;
   GeoPoint currentGeoPoint;
   LatLng currentCenter;
   double latitude = 0;
@@ -40,9 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   CameraPosition cameraPosition;
   var _mapController;
   List<String> sentTMNicknames;
-
-
-
 
   @override
   void initState() {
@@ -69,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? CircularProgressIndicator()
                   : GoogleMap(
                       markers: _markers,
+                      circles: _circles,
                       onLongPress: (LatLng coor) {
                         setState(() {
                           currentMarker == null
@@ -115,14 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               RawMaterialButton(
                                 elevation: 2.0,
-                                // fillColor: Colors.teal,
-                                fillColor: KIconFill,
+                                fillColor: kPrimaryColor,
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Icon(
                                     Icons.location_searching_sharp,
                                     size: 45.0,
-                                    color: grn,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -144,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             RawMaterialButton(
                                 elevation: 2.0,
-                                fillColor: KIconFill,
+                                fillColor: kPrimaryColor,
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Icon(
@@ -164,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         CustomButton(
                           color: kPrimaryColor,
-                          textColor: MedGrn,
+                          textColor: Colors.white,
                           btnText: 'Create a Text Mark',
                           fontSize: 22.5,
                           onTap: () async {
@@ -238,19 +235,31 @@ class _HomeScreenState extends State<HomeScreen> {
     this.currentCenter = LatLng(this.latitude, this.longitude);
 
     _markers.removeWhere((element) => element.markerId.value == "You");
+    _circles.removeWhere((element) => element.circleId.value == "youCircle");
 
     ImageConfiguration configuration = createLocalImageConfiguration(context);
 
     BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(
         configuration, 'assets/image0.png');
 
-    this.You = new Marker(
+    this.you = new Marker(
         markerId: new MarkerId("You"),
         position: LatLng(latitude, longitude),
         infoWindow: InfoWindow(title: "You"),
         icon: BitmapDescriptor.defaultMarkerWithHue(50));
 
-    _markers.add(You);
+    this.youCircle = new Circle(
+      circleId: new CircleId("youCircle"),
+      center: LatLng(latitude, longitude),
+      fillColor: kPrimaryColor.withOpacity(0.5),
+      radius: 200.0,
+      strokeWidth: 1,
+      strokeColor: kPrimaryColor,
+    );
+
+    _circles.add(youCircle);
+
+    _markers.add(you);
   }
 
   void getMarkers() async {
@@ -318,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
 
-    newMarkers.add(this.You);
+    newMarkers.add(this.you);
     if (this.currentMarker != null) {
       newMarkers.add(this.currentMarker);
     }

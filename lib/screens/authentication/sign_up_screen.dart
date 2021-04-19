@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
@@ -64,26 +65,19 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(
                 height: 15.0,
               ),
-              FlatButton(
-                color: kPrimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40.0),
-                ),
-                child: Text(
-                  'Create',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {
+              CustomButton(
+                color: Colors.white,
+                btnText: 'Create',
+                fontSize: 18.0,
+                textColor: kPrimaryColor,
+                onTap: () {
                   bool validUsername = DataHandling().saveNewUser(
                       loggedInUser.email, loggedInUser.uid, enteredUsername);
                   if (validUsername) {
                     Navigator.pushNamed(context, HomeScreen.id);
                   }
                 },
-              ),
+              )
             ],
           ),
         ),
