@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/account_screen.dart';
 
 import '../../constants.dart';
@@ -41,19 +42,12 @@ class ChangedUsernameScreen extends StatelessWidget {
               SizedBox(
                 height: 15.0,
               ),
-              FlatButton(
-                color: kPrimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40.0),
-                ),
-                child: Text(
-                  'Back',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () => Navigator.pushNamed(context, AccountScreen.id),
+              CustomButton(
+                color: Colors.white,
+                textColor: kPrimaryColor,
+                fontSize: 18.0,
+                btnText: 'Back',
+                onTap: () => Navigator.pushNamed(context, AccountScreen.id),
               ),
             ],
           ),

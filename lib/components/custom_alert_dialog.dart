@@ -28,19 +28,23 @@ class CustomAlertDialog extends StatelessWidget {
       shape:
           RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15)),
       actions: <Widget>[
-        new FlatButton(
-          child: new Text(confirm),
-          textColor: Colors.black,
-          onPressed: () {
-            this.confirmOnPressed();
-          },
+        new TextButton(
+          onPressed: () => {this.confirmOnPressed()},
+          child: new Text(
+            confirm,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
         ),
-        new FlatButton(
-          child: Text(cancel),
-          textColor: Colors.black,
-          onPressed: () {
-            this.cancelOnPressed();
-          },
+        new TextButton(
+          onPressed: () => {this.confirmOnPressed()},
+          child: new Text(
+            cancel,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
         ),
       ],
     );

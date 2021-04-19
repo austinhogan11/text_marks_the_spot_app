@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/changed_username_screen.dart';
 
@@ -39,7 +40,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                 'Enter a new username:',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: DrkGrn,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -57,7 +58,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                   ),
                   hintText: 'Username',
                   hintStyle: TextStyle(
-                    color: grn,
+                    color: Colors.grey,
                   ),
                 ),
                 onChanged: (value) => newUsername = value,
@@ -65,19 +66,12 @@ class ChangeUserNameScreen extends StatelessWidget {
               SizedBox(
                 height: 15.0,
               ),
-              FlatButton(
-                color: DrkGrn,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40.0),
-                ),
-                child: Text(
-                  'Change',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: grn,
-                  ),
-                ),
-                onPressed: () {
+              CustomButton(
+                color: Colors.white,
+                textColor: kPrimaryColor,
+                fontSize: 18.0,
+                btnText: 'Change',
+                onTap: () {
                   bool validUsername = DataHandling()
                       .updateUsername(loggedInUser.uid, newUsername);
                   if (validUsername) {

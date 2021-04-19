@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
-import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 final User currentUser = FirebaseAuth.instance.currentUser;
 
@@ -57,7 +56,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   'Create a Text Mark',
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: MedGrn,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -74,7 +73,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     decoration: InputDecoration(
                       hintText: 'nickname',
                       hintStyle: TextStyle(
-                        color: grn,
+                        color: Colors.grey,
                       ),
                     ),
                     onChanged: (value) => textMarkNickname = value,
@@ -85,12 +84,12 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: grn,
+                        color: Colors.grey,
                       ),
                       decoration: InputDecoration(
                         hintText: 'recipient username',
                         hintStyle: TextStyle(
-                          color: grn,
+                          color: Colors.grey,
                         ),
                       ),
                       onChanged: (value) => {
@@ -102,7 +101,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: grn,
+                      color: Colors.white,
                     ),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -110,7 +109,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                       ),
                       hintText: 'Message',
                       hintStyle: TextStyle(
-                        color: grn,
+                        color: Colors.grey,
                       ),
                     ),
                     onChanged: (value) => textMarkMessage = value,
@@ -125,8 +124,8 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   CustomButton(
                     btnText: 'Send',
                     fontSize: 15.0,
-                    color: KIconFill,
-                    textColor: grn,
+                    color: Colors.white,
+                    textColor: kPrimaryColor,
                     onTap: () => {
                       creationDate = DateTime.now(),
                       textmarkDateLabel =
@@ -212,12 +211,12 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       isExpanded: true,
-      focusColor: grn,
+      focusColor: Colors.white,
       dropdownColor: kAccentColor,
       value: _expirationOption,
       elevation: 5,
-      style: TextStyle(color: grn),
-      iconEnabledColor: grn,
+      style: TextStyle(color: Colors.white),
+      iconEnabledColor: Colors.white,
       items: <String>[
         'No Expiration',
         '30 days',
@@ -228,7 +227,7 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
           child: Center(
             child: Text(
               value,
-              style: TextStyle(color: grn),
+              style: TextStyle(color: Colors.white),
             ),
           ),
         );
@@ -237,7 +236,7 @@ class _ExpirationDropdownState extends State<ExpirationDropdown> {
         child: Text(
           "Choose a message duration",
           style: TextStyle(
-            color: grn,
+            color: Colors.white,
             fontSize: 15,
           ),
         ),

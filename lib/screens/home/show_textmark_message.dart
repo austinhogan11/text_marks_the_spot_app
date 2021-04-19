@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
-import 'package:text_marks_the_spot_app/data/data_handling.dart';
-import 'package:text_marks_the_spot_app/screens/home/home_screen.dart';
 
 final User currentUser = FirebaseAuth.instance.currentUser;
 
@@ -96,34 +93,6 @@ class _ShowMessageState extends State<ShowMessage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class RadiusSlider extends StatefulWidget {
-  @override
-  _RadiusSliderState createState() => _RadiusSliderState();
-}
-
-class _RadiusSliderState extends State<RadiusSlider> {
-  double radiusValue = 0.5;
-  @override
-  Widget build(BuildContext context) {
-    return Slider(
-      activeColor: Colors.white,
-      inactiveColor: kAccentColor,
-      value: radiusValue,
-      min: 0.0,
-      max: 1.0,
-      divisions: 4,
-      label: '${radiusValue.toString()}mi',
-      onChanged: (updatedRadius) {
-        setState(
-          () {
-            radiusValue = updatedRadius;
-          },
-        );
-      },
     );
   }
 }
