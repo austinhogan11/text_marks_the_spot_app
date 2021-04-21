@@ -44,7 +44,7 @@ class _AccountScreenState extends State<AccountScreen> {
       backgroundColor: kAccentColor,
       appBar: CustomAppBar(
         title: 'Account Settings',
-        icon: kBackIconButton,
+        icon: KBackIconButton,
         iconFunction: () => Navigator.pop(context),
       ),
       body: Center(
