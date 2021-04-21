@@ -23,63 +23,33 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return FlatButton(
+      color: color,
+      splashColor: kPrimaryColor,
       onPressed: onTap,
-      style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(kAccentColor),
-        backgroundColor: MaterialStateProperty.all<Color>(color),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-        ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+        padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (image != null)
               Image(image: AssetImage("assets/$image"), height: 25.0),
-            if (image != null) SizedBox(width: 10.0),
-            Text(
-              btnText,
-              style: TextStyle(
-                  fontSize: fontSize,
-                  color: textColor,
-                  fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                btnText,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    color: textColor,
+                    fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),
       ),
     );
-    // return FlatButton(
-    //   color: color,
-    //   splashColor: kPrimaryColor,
-    //   onPressed: onTap,
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(40),
-    //   ),
-    //   child: Padding(
-    //     padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: <Widget>[
-    //         if (image != null)
-    //           Image(image: AssetImage("assets/$image"), height: 25.0),
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 10),
-    //           child: Text(
-    //             btnText,
-    //             style: TextStyle(
-    //                 fontSize: fontSize,
-    //                 color: textColor,
-    //                 fontWeight: FontWeight.bold),
-    //           ),
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

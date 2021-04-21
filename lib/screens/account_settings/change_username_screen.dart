@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 import 'package:text_marks_the_spot_app/screens/account_settings/changed_username_screen.dart';
 
@@ -23,7 +22,7 @@ class ChangeUserNameScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context, false),
             icon: Icon(
               Icons.arrow_back_ios,
-              color: MedGrn,
+              color: Colors.white,
             ),
           ),
         ),
@@ -40,7 +39,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                 'Enter a new username:',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: MedGrn,
+                  color: DrkGrn,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -50,7 +49,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Alabaster,
+                  color: grn,
                 ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -58,7 +57,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                   ),
                   hintText: 'Username',
                   hintStyle: TextStyle(
-                    color: Colors.grey,
+                    color: grn,
                   ),
                 ),
                 onChanged: (value) => newUsername = value,
@@ -66,12 +65,19 @@ class ChangeUserNameScreen extends StatelessWidget {
               SizedBox(
                 height: 15.0,
               ),
-              CustomButton(
-                color: Colors.white,
-                textColor: KIconFill,
-                fontSize: 18.0,
-                btnText: 'Change',
-                onTap: () {
+              FlatButton(
+                color: DrkGrn,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                ),
+                child: Text(
+                  'Change',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: grn,
+                  ),
+                ),
+                onPressed: () {
                   bool validUsername = DataHandling()
                       .updateUsername(loggedInUser.uid, newUsername);
                   if (validUsername) {

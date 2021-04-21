@@ -44,7 +44,8 @@ class _AccountScreenState extends State<AccountScreen> {
       backgroundColor: kAccentColor,
       appBar: CustomAppBar(
         title: 'Account Settings',
-        icon: KBackIconButton,
+        icon: kBackIconButton,
+        // iconFunction: () => Navigator.pushNamed(context, HomeScreen.id),
         iconFunction: () => Navigator.pop(context),
       ),
       body: Center(
@@ -63,26 +64,30 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: Text(
                   username == null ? '' : username,
                   style: TextStyle(
-                    color: MedGrn,
                     fontSize: 20.0,
+                    color: grn,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               SettingsButton(
                 btnText: 'Change Username',
+                color: grn,
                 screenNavRoute: ChangeUserNameScreen.id,
               ),
               SettingsButton(
                 btnText: 'Location Services',
+                color: grn,
                 screenNavRoute: LocationServicesScreen.id,
               ),
               SettingsButton(
                 btnText: 'Help',
+                color: grn,
                 screenNavRoute: HelpScreen.id,
               ),
               SettingsButton(
                 btnText: 'Logout',
+                color: grn,
                 screenNavRoute: LoginScreen.id,
               ),
             ],
