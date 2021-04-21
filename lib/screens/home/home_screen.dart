@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Icon(
                                     Icons.location_searching_sharp,
                                     size: 45.0,
-                                    color: Colors.white,
+                                    color: Alabaster,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Icon(
                                     Icons.message_sharp,
                                     size: 45.0,
-                                    color: grn,
+                                    color: Alabaster,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         CustomButton(
                           color: kPrimaryColor,
-                          textColor: Colors.white,
+                          textColor: MedGrn,
                           btnText: 'Create a Text Mark',
                           fontSize: 22.5,
                           onTap: () async {

@@ -11,17 +11,17 @@ const Color DrkGrn = Color(0Xff379683);
 
 const Color MedGrn = Color(0xff8EE4AF);
 
-const Color grn = const Color(0xFFEDF5E1);
+const Color Alabaster = const Color(0xFFEDF5E1);
 
 const Icon kBackIconButton = Icon(
   Icons.arrow_back_ios,
-  color: Colors.white,
+  color: MedGrn,
 );
 
 const Icon kSettingsIconButton = Icon(
   Icons.settings,
   size: 30.0,
-  color: Colors.white,
+  color: MedGrn,
 );
 
 const TextStyle kTextMarkTextStyleBold = TextStyle(

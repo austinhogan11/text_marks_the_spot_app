@@ -56,7 +56,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   'Create a Text Mark',
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: Colors.white,
+                    color: MedGrn,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

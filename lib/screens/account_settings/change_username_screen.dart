@@ -23,7 +23,7 @@ class ChangeUserNameScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context, false),
             icon: Icon(
               Icons.arrow_back_ios,
-              color: Colors.white,
+              color: MedGrn,
             ),
           ),
         ),
@@ -40,7 +40,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                 'Enter a new username:',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.white,
+                  color: MedGrn,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -50,7 +50,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: grn,
+                  color: Alabaster,
                 ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -68,7 +68,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               ),
               CustomButton(
                 color: Colors.white,
-                textColor: kPrimaryColor,
+                textColor: KIconFill,
                 fontSize: 18.0,
                 btnText: 'Change',
                 onTap: () {

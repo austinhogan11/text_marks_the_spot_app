@@ -63,7 +63,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: Text(
                   username == null ? '' : username,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MedGrn,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/functionality/authentication/user_authentication_handling.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 
@@ -27,7 +28,7 @@ class SettingsButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         highlightElevation: 0,
-        borderSide: BorderSide(color: Colors.white, width: 2.0),
+        borderSide: BorderSide(color: MedGrn, width: 2.0),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: Row(
@@ -40,7 +41,7 @@ class SettingsButton extends StatelessWidget {
                   style: TextStyle(
                     height: 1.5,
                     fontSize: 20,
-                    color: Colors.white,
+                    color: MedGrn,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
