@@ -40,12 +40,15 @@ class _HomeScreenState extends State<HomeScreen> {
   CameraPosition cameraPosition;
   var _mapController;
   List<String> sentTMNicknames;
+  BitmapDescriptor icon;
 
   @override
   void initState() {
     super.initState();
     getLocation();
-    print('INIT');
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), 'assets/fd.png')
+        .then((value) => icon = value);
   }
 
   @override
@@ -59,8 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: kAccentColor,
       body: Container(
         child: Stack(
-            overflow: Overflow.visible,
-            alignment: Alignment.center,
+            clipBehavior: Clip.none, alignment: Alignment.center,
             children: [
               (_initialPosition == null || this.cameraPosition == null)
                   ? CircularProgressIndicator()
@@ -76,11 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               new GeoPoint(coor.latitude, coor.longitude);
                           currentMarker = new Marker(
                               markerId: MarkerId("currentMarker"),
+                              onTap: (){
+                                _markers.removeWhere((element) => element.markerId.value == "currentMarker");
+                                _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                                    target: LatLng(currentCenter.latitude, currentCenter.longitude), zoom: currentZoom)));
+                                setState(() {});
+                              },
                               position: coor,
-                              infoWindow: InfoWindow(
-                                title: "",
-                                snippet: "",
-                              ),
                               icon: BitmapDescriptor.defaultMarkerWithHue(100));
                         });
                         _markers.add(currentMarker);
@@ -89,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onCameraMove: (CameraPosition position) {
                         setState(() {
                           currentCenter = position.target;
+                          currentZoom = position.zoom;
                         });
                       },
                       myLocationButtonEnabled: false,
@@ -162,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         CustomButton(
                           color: kPrimaryColor,
                           textColor: Colors.white,
-                          btnText: 'Create a Text Mark',
+                          btnText: 'Create Textmark',
                           fontSize: 22.5,
                           onTap: () async {
                             String test = await showModalBottomSheet<String>(
@@ -240,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ImageConfiguration configuration = createLocalImageConfiguration(context);
 
     BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(
-        configuration, 'assets/image0.png');
+        ImageConfiguration(size: Size(12, 12)), 'assets/image0.png');
 
     this.you = new Marker(
         markerId: new MarkerId("You"),
@@ -252,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
       circleId: new CircleId("youCircle"),
       center: LatLng(latitude, longitude),
       fillColor: kPrimaryColor.withOpacity(0.5),
-      radius: 200.0,
+      radius: 1610.0, // 1 mile
       strokeWidth: 1,
       strokeColor: kPrimaryColor,
     );
@@ -268,61 +273,59 @@ class _HomeScreenState extends State<HomeScreen> {
     CollectionReference textmarks = DataHandling().textmarks;
     QuerySnapshot firestoreTextMarks = await textmarks.get();
 
-    GeoPoint g;
+    GeoPoint markerCoordinates;
     String id;
     double hue;
     String user;
     String snippet;
+    bool isReceived;
     Set<Marker> newMarkers = new Set<Marker>();
 
     firestoreTextMarks.docs.forEach((map) {
+      isReceived = false;
       if (map.data().containsValue(loggedInUser.uid)) {
-        g = map["coordinates"];
+        markerCoordinates = map["coordinates"];
         if (map["senderUID"] == loggedInUser.uid) {
           id = "Sent/" +
               loggedInUser.uid +
               "/" +
-              g.latitude.toString() +
+              markerCoordinates.latitude.toString() +
               "/" +
-              g.longitude.toString();
+              markerCoordinates.longitude.toString();
           hue = 240;
           snippet =
               "Sent to ${map["recipientUsername"]} on ${map["dateLabel"]}";
           user = map["recipientUsername"];
         } else if (map["recipientUID"] == loggedInUser.uid) {
+          isReceived = true;
           id = "Received/" +
               loggedInUser.uid +
               "/" +
-              g.latitude.toString() +
+              markerCoordinates.latitude.toString() +
               "/" +
-              g.longitude.toString();
+              markerCoordinates.longitude.toString();
           hue = 0;
           snippet = "Sent by ${map["senderUsername"]} on ${map["dateLabel"]}";
           user = map["senderUsername"];
         }
 
-        BitmapDescriptor b;
-
-        BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(12, 12)),
-                'fonts/MyFlutterApp.ttf')
-            .then((d) {
-          b = d;
-        });
-
         newMarkers.add(new Marker(
             markerId: new MarkerId(id),
-            position: LatLng(g.latitude, g.longitude),
-            onTap: () {},
+            position: LatLng(markerCoordinates.latitude, markerCoordinates.longitude),
             infoWindow: InfoWindow(
                 title: map["locationNickname"],
                 snippet: user, //user that sends or receives the textmark
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) => ShowMessage(
-                        g, map["locationNickname"], map["message"], snippet),
-                  );
-                }),
+                onTap: !isReceived || (isReceived && markerIsWithin1Mile(markerCoordinates.latitude, markerCoordinates.longitude, this.latitude, this.longitude)) ? (){
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) => ShowMessage(
+                          markerCoordinates, map["locationNickname"], map["message"], snippet),
+                    );}
+                : (){showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) => ShowMessage(
+                      markerCoordinates, "", "You must be within a mile to see a textmark's content", ""),
+                );}),
             icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
       }
     });
