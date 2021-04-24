@@ -31,11 +31,9 @@ Future<Position> determinePosition() async {
   return await Geolocator.getCurrentPosition();
 }
 
-bool markerIsWithin1Mile(double markerLat, double markerLon1, double youLan2, double youLon2){
+bool markerIsWithinHalfAMile(double markerLat, double markerLon1, double youLan2, double youLon2){
   double distance = Geolocator.distanceBetween(markerLat, markerLon1, youLan2, youLon2);
-  print("HEEEERRRRREEEEEEEEEEEEEEEE");
-  print(distance);
-  if(distance <= 1610){
+  if(distance <= 805){ // in meters
     return true;
   }
   else{

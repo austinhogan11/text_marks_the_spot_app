@@ -53,7 +53,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0.0),
                 child: Text(
-                  'Create a Text Mark',
+                  'Create a Textmark',
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.white,
@@ -126,27 +126,34 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                     fontSize: 15.0,
                     color: Colors.white,
                     textColor: kPrimaryColor,
-                    onTap: () => {
-                      creationDate = DateTime.now(),
+                    onTap: ()  {
+                      print(this.textMarkMessage);
+                      bool isBlank1 = this.textMarkMessage?.trim()?.isEmpty ?? true;
+                      bool isBlank2 = this.textMarkRecipientUsername?.trim()?.isEmpty ?? true;
+                      bool isBlank3 = this.textMarkNickname?.trim()?.isEmpty ?? true;
+                      if(isBlank1 == true || isBlank2 == true || isBlank3 == true){ // empty textmark
+                        return;
+                      }
+                      creationDate = DateTime.now();
                       textmarkDateLabel =
-                          creationDate.toString().substring(5, 10),
+                          creationDate.toString().substring(5, 10);
                       if (_expirationOption == '30 days')
                         {
                           expirationDate =
-                              creationDate.add(new Duration(days: 30)),
+                              creationDate.add(new Duration(days: 30));
                         }
                       else if (_expirationOption == '1 year')
                         {
                           expirationDate =
-                              creationDate.add(new Duration(days: 365)),
+                              creationDate.add(new Duration(days: 365));
                         }
                       else
                         {
                           expirationDate =
-                              creationDate.add(new Duration(days: 36500)),
-                        },
+                              creationDate.add(new Duration(days: 36500));
+                        }
                       print(
-                          "Current Date: $creationDate\n ExpirationDate: $expirationDate"),
+                          "Current Date: $creationDate\n ExpirationDate: $expirationDate");
                       DataHandling()
                           .saveTextMark(
                               creationDate,
@@ -159,7 +166,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                               textMarkMessage)
                           .then(
                             (value) => Navigator.pop(context, "Sent"),
-                          ),
+                          );
                     },
                   ),
                 ],

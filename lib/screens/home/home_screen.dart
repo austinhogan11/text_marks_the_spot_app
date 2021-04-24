@@ -39,16 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   double currentZoom = 15;
   CameraPosition cameraPosition;
   var _mapController;
-  List<String> sentTMNicknames;
-  BitmapDescriptor icon;
 
   @override
   void initState() {
     super.initState();
     getLocation();
-    BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(), 'assets/fd.png')
-        .then((value) => icon = value);
   }
 
   @override
@@ -170,20 +165,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           btnText: 'Create Textmark',
                           fontSize: 22.5,
                           onTap: () async {
-                            String test = await showModalBottomSheet<String>(
+                            String markerWasSent = await showModalBottomSheet<String>(
                               context: context,
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
                               builder: (context) => CreateTextMark(
                                   coordinates: this.currentGeoPoint),
                             );
-
-                            if (test != null) {
+                            if (markerWasSent != null) { // green marker is replaced with blue/red
                               _markers.remove(this.currentMarker);
                               this.currentMarker = null;
-                              //  setState(() {
                               getMarkers();
-                              //});
                             }
                           },
                         ),
@@ -242,11 +234,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _markers.removeWhere((element) => element.markerId.value == "You");
     _circles.removeWhere((element) => element.circleId.value == "youCircle");
 
-    ImageConfiguration configuration = createLocalImageConfiguration(context);
-
-    BitmapDescriptor b = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(12, 12)), 'assets/image0.png');
-
     this.you = new Marker(
         markerId: new MarkerId("You"),
         position: LatLng(latitude, longitude),
@@ -257,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
       circleId: new CircleId("youCircle"),
       center: LatLng(latitude, longitude),
       fillColor: kPrimaryColor.withOpacity(0.5),
-      radius: 1610.0, // 1 mile
+      radius: 805.0, // 1 mile
       strokeWidth: 1,
       strokeColor: kPrimaryColor,
     );
@@ -315,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
             infoWindow: InfoWindow(
                 title: map["locationNickname"],
                 snippet: user, //user that sends or receives the textmark
-                onTap: !isReceived || (isReceived && markerIsWithin1Mile(markerCoordinates.latitude, markerCoordinates.longitude, this.latitude, this.longitude)) ? (){
+                onTap: !isReceived || (isReceived && markerIsWithinHalfAMile(markerCoordinates.latitude, markerCoordinates.longitude, this.latitude, this.longitude)) ? (){
                     showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) => ShowMessage(
