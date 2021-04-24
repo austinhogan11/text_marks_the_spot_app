@@ -68,7 +68,6 @@ class SignUpScreen extends StatelessWidget {
               CustomButton(
                 color: Colors.white,
                 btnText: 'Create',
-                fontSize: 18.0,
                 textColor: kPrimaryColor,
                 onTap: () {
                   bool validUsername = DataHandling().saveNewUser(

@@ -50,7 +50,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: grn,
+                  color: Colors.white,
                 ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -69,8 +69,7 @@ class ChangeUserNameScreen extends StatelessWidget {
               CustomButton(
                 color: Colors.white,
                 textColor: kPrimaryColor,
-                fontSize: 18.0,
-                btnText: 'Change',
+                btnText: 'Submit',
                 onTap: () {
                   bool validUsername = DataHandling()
                       .updateUsername(loggedInUser.uid, newUsername);

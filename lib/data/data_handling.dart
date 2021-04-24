@@ -91,8 +91,26 @@ class DataHandling {
         });
 
     //Creates a new textmark document
+    // textmarks
+    //     .add({
+    //       'creationDate': creationDate,
+    //       'expirationDate': expirationDate,
+    //       'dateLabel': dateLabel,
+    //       'senderUID': loggedInUser.uid,
+    //       'senderUsername': senderUsername,
+    //       'recipientUID': recipientUID,
+    //       'recipientUsername': recipientUsername,
+    //       'coordinates': coordinates,
+    //       'locationNickname': locationNickname,
+    //       'message': messageContents,
+    //     })
+    //     .then((value) => print(
+    //         'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}, ${coordinates.latitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
+    //     .catchError((e) => print('Failed to save Textmark.'));
+
     textmarks
-        .add({
+        .doc("${loggedInUser.uid}${creationDate.toString()}")
+        .set({
           'creationDate': creationDate,
           'expirationDate': expirationDate,
           'dateLabel': dateLabel,

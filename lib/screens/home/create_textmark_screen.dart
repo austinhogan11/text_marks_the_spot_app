@@ -27,10 +27,10 @@ class _CreateTextMarkState extends State<CreateTextMark> {
     super.initState();
   }
 
-  @override
   String textMarkRecipientUsername;
   String textMarkNickname;
   String textMarkMessage;
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: (MediaQuery.of(context).size.height > 850.0)
@@ -47,7 +47,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
         ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
-          // padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 30.0),
           child: Column(
             children: [
               Padding(
@@ -84,7 +83,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                       decoration: InputDecoration(
                         hintText: 'recipient username',
@@ -123,35 +122,36 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   ),
                   CustomButton(
                     btnText: 'Send',
-                    fontSize: 15.0,
                     color: Colors.white,
                     textColor: kPrimaryColor,
-                    onTap: ()  {
+                    onTap: () {
                       print(this.textMarkMessage);
-                      bool isBlank1 = this.textMarkMessage?.trim()?.isEmpty ?? true;
-                      bool isBlank2 = this.textMarkRecipientUsername?.trim()?.isEmpty ?? true;
-                      bool isBlank3 = this.textMarkNickname?.trim()?.isEmpty ?? true;
-                      if(isBlank1 == true || isBlank2 == true || isBlank3 == true){ // empty textmark
+                      bool isBlank1 =
+                          this.textMarkMessage?.trim()?.isEmpty ?? true;
+                      bool isBlank2 =
+                          this.textMarkRecipientUsername?.trim()?.isEmpty ??
+                              true;
+                      bool isBlank3 =
+                          this.textMarkNickname?.trim()?.isEmpty ?? true;
+                      if (isBlank1 == true ||
+                          isBlank2 == true ||
+                          isBlank3 == true) {
+                        // empty textmark
                         return;
                       }
                       creationDate = DateTime.now();
                       textmarkDateLabel =
                           creationDate.toString().substring(5, 10);
-                      if (_expirationOption == '30 days')
-                        {
-                          expirationDate =
-                              creationDate.add(new Duration(days: 30));
-                        }
-                      else if (_expirationOption == '1 year')
-                        {
-                          expirationDate =
-                              creationDate.add(new Duration(days: 365));
-                        }
-                      else
-                        {
-                          expirationDate =
-                              creationDate.add(new Duration(days: 36500));
-                        }
+                      if (_expirationOption == '30 days') {
+                        expirationDate =
+                            creationDate.add(new Duration(days: 30));
+                      } else if (_expirationOption == '1 year') {
+                        expirationDate =
+                            creationDate.add(new Duration(days: 365));
+                      } else {
+                        expirationDate =
+                            creationDate.add(new Duration(days: 36500));
+                      }
                       print(
                           "Current Date: $creationDate\n ExpirationDate: $expirationDate");
                       DataHandling()
@@ -175,34 +175,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class RadiusSlider extends StatefulWidget {
-  @override
-  _RadiusSliderState createState() => _RadiusSliderState();
-}
-
-class _RadiusSliderState extends State<RadiusSlider> {
-  double radiusValue = 0.0;
-  @override
-  Widget build(BuildContext context) {
-    return Slider(
-      activeColor: Colors.white,
-      inactiveColor: kAccentColor,
-      value: radiusValue,
-      min: 0.0,
-      max: 1.0,
-      divisions: 4,
-      label: '${radiusValue.toString()}mi',
-      onChanged: (updatedRadius) {
-        setState(
-          () {
-            radiusValue = updatedRadius;
-          },
-        );
-      },
     );
   }
 }

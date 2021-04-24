@@ -67,7 +67,6 @@ class _ShowMessageState extends State<ShowMessage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // RadiusSlider(),
                         Text(
                           widget.textMarkMessage,
                           style: TextStyle(

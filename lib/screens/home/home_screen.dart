@@ -50,14 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "home",
+        title: "Home",
         icon: kSettingsIconButton,
         iconFunction: () => Navigator.pushNamed(context, AccountScreen.id),
       ),
       backgroundColor: kAccentColor,
       body: Container(
         child: Stack(
-            clipBehavior: Clip.none, alignment: Alignment.center,
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
             children: [
               (_initialPosition == null || this.cameraPosition == null)
                   ? CircularProgressIndicator()
@@ -73,10 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               new GeoPoint(coor.latitude, coor.longitude);
                           currentMarker = new Marker(
                               markerId: MarkerId("currentMarker"),
-                              onTap: (){
-                                _markers.removeWhere((element) => element.markerId.value == "currentMarker");
-                                _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                                    target: LatLng(currentCenter.latitude, currentCenter.longitude), zoom: currentZoom)));
+                              onTap: () {
+                                _markers.removeWhere((element) =>
+                                    element.markerId.value == "currentMarker");
+                                _mapController.moveCamera(
+                                    CameraUpdate.newCameraPosition(
+                                        CameraPosition(
+                                            target: LatLng(
+                                                currentCenter.latitude,
+                                                currentCenter.longitude),
+                                            zoom: currentZoom)));
                                 setState(() {});
                               },
                               position: coor,
@@ -147,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Icon(
                                     Icons.message_sharp,
                                     size: 45.0,
-                                    color: grn,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 shape: CircleBorder(),
@@ -163,16 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: kPrimaryColor,
                           textColor: Colors.white,
                           btnText: 'Create Textmark',
-                          fontSize: 22.5,
                           onTap: () async {
-                            String markerWasSent = await showModalBottomSheet<String>(
+                            String markerWasSent =
+                                await showModalBottomSheet<String>(
                               context: context,
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
                               builder: (context) => CreateTextMark(
                                   coordinates: this.currentGeoPoint),
                             );
-                            if (markerWasSent != null) { // green marker is replaced with blue/red
+                            if (markerWasSent != null) {
+                              // green marker is replaced with blue/red
                               _markers.remove(this.currentMarker);
                               this.currentMarker = null;
                               getMarkers();
@@ -243,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
     this.youCircle = new Circle(
       circleId: new CircleId("youCircle"),
       center: LatLng(latitude, longitude),
-      fillColor: kPrimaryColor.withOpacity(0.5),
+      fillColor: kPrimaryColor.withOpacity(0.1),
       radius: 805.0, // 1 mile
       strokeWidth: 1,
       strokeColor: kPrimaryColor,
@@ -298,21 +306,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
         newMarkers.add(new Marker(
             markerId: new MarkerId(id),
-            position: LatLng(markerCoordinates.latitude, markerCoordinates.longitude),
+            position:
+                LatLng(markerCoordinates.latitude, markerCoordinates.longitude),
             infoWindow: InfoWindow(
                 title: map["locationNickname"],
                 snippet: user, //user that sends or receives the textmark
-                onTap: !isReceived || (isReceived && markerIsWithinHalfAMile(markerCoordinates.latitude, markerCoordinates.longitude, this.latitude, this.longitude)) ? (){
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) => ShowMessage(
-                          markerCoordinates, map["locationNickname"], map["message"], snippet),
-                    );}
-                : (){showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) => ShowMessage(
-                      markerCoordinates, "", "You must be within a mile to see a textmark's content", ""),
-                );}),
+                onTap: !isReceived ||
+                        (isReceived &&
+                            markerIsWithinHalfAMile(
+                                markerCoordinates.latitude,
+                                markerCoordinates.longitude,
+                                this.latitude,
+                                this.longitude))
+                    ? () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) => ShowMessage(
+                              markerCoordinates,
+                              map["locationNickname"],
+                              map["message"],
+                              snippet),
+                        );
+                      }
+                    : () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) => ShowMessage(
+                              markerCoordinates,
+                              "",
+                              "You must be within half a mile to see a textmark's content",
+                              ""),
+                        );
+                      }),
             icon: BitmapDescriptor.defaultMarkerWithHue(hue)));
       }
     });
