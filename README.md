@@ -11,15 +11,8 @@
 ## Client
 - Hot Sake LLC
 
-## Getting Started
+## Instructions
+- To execute this source code for the mobile application Text Marks the Spot, you should insert this code into your established IDE (Android Studio, VS Code, or personal preference) & either set up an iPhone/Android Emulator or connect a physical iOS/Android Device to run the application on.
+- Before the application source code can be executed you must run "pub get" from the pubspec.yaml file or in your terminal to download the packages the application depends on. The list of packages is found in the pubspec.yaml.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
