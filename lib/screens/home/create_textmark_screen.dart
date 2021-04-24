@@ -27,10 +27,10 @@ class _CreateTextMarkState extends State<CreateTextMark> {
     super.initState();
   }
 
-  @override
   String textMarkRecipientUsername;
   String textMarkNickname;
   String textMarkMessage;
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: (MediaQuery.of(context).size.height > 850.0)
@@ -47,7 +47,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
         ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
-          // padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 30.0),
           child: Column(
             children: [
               Padding(
@@ -84,7 +83,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   TextField(
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                       decoration: InputDecoration(
                         hintText: 'recipient username',
@@ -123,7 +122,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                   ),
                   CustomButton(
                     btnText: 'Send',
-                    fontSize: 15.0,
                     color: Colors.white,
                     textColor: kPrimaryColor,
                     onTap: () => {
@@ -168,34 +166,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class RadiusSlider extends StatefulWidget {
-  @override
-  _RadiusSliderState createState() => _RadiusSliderState();
-}
-
-class _RadiusSliderState extends State<RadiusSlider> {
-  double radiusValue = 0.0;
-  @override
-  Widget build(BuildContext context) {
-    return Slider(
-      activeColor: Colors.white,
-      inactiveColor: kAccentColor,
-      value: radiusValue,
-      min: 0.0,
-      max: 1.0,
-      divisions: 4,
-      label: '${radiusValue.toString()}mi',
-      onChanged: (updatedRadius) {
-        setState(
-          () {
-            radiusValue = updatedRadius;
-          },
-        );
-      },
     );
   }
 }

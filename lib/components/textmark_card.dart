@@ -50,7 +50,6 @@ class TextmarkCard extends StatelessWidget {
         ),
         title: Text("$locationNickname"),
         subtitle: Text(username),
-        // trailing: Icon(Icons.more_vert),
         onTap: () {
           Navigator.pop(context, this.coordinates);
         },

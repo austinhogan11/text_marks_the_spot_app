@@ -57,7 +57,8 @@ class TextmarksStream extends StatelessWidget {
                 locationNickname: textmark['locationNickname'],
                 coordinates: textmark['coordinates'],
               );
-              textmarkCards.add(textmarkCard);
+              // textmarkCards.add(textmarkCard);
+              textmarkCards.insert(0, textmarkCard);
             }
           }
         }

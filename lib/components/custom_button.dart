@@ -10,16 +10,15 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final Color textColor;
   final String btnText;
-  final double fontSize;
   final Function onTap;
 
-  CustomButton(
-      {this.image,
-      this.btnText,
-      this.fontSize,
-      this.color,
-      this.textColor,
-      this.onTap});
+  CustomButton({
+    this.image,
+    this.btnText,
+    this.color,
+    this.textColor,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class CustomButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(color),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.circular(17.5),
           ),
         ),
       ),
@@ -40,46 +39,21 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (image != null)
-              Image(image: AssetImage("assets/$image"), height: 25.0),
+              Image(
+                image: AssetImage("assets/$image"),
+                height: 25.0,
+              ),
             if (image != null) SizedBox(width: 10.0),
             Text(
               btnText,
               style: TextStyle(
-                  fontSize: fontSize,
+                  fontSize: 17.0,
                   color: textColor,
                   fontWeight: FontWeight.bold),
-            )
+            ),
           ],
         ),
       ),
     );
-    // return FlatButton(
-    //   color: color,
-    //   splashColor: kPrimaryColor,
-    //   onPressed: onTap,
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(40),
-    //   ),
-    //   child: Padding(
-    //     padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: <Widget>[
-    //         if (image != null)
-    //           Image(image: AssetImage("assets/$image"), height: 25.0),
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 10),
-    //           child: Text(
-    //             btnText,
-    //             style: TextStyle(
-    //                 fontSize: fontSize,
-    //                 color: textColor,
-    //                 fontWeight: FontWeight.bold),
-    //           ),
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

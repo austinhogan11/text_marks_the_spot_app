@@ -5,9 +5,6 @@ import 'package:text_marks_the_spot_app/components/custom_app_bar.dart';
 import 'package:text_marks_the_spot_app/components/settings_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
-import 'package:text_marks_the_spot_app/screens/account_settings/change_username_screen.dart';
-import 'package:text_marks_the_spot_app/screens/account_settings/help_screen.dart';
-import 'package:text_marks_the_spot_app/screens/account_settings/location_services_screen.dart';
 import 'package:text_marks_the_spot_app/screens/authentication/login_screen.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -68,18 +65,6 @@ class _AccountScreenState extends State<AccountScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              SettingsButton(
-                btnText: 'Change Username',
-                screenNavRoute: ChangeUserNameScreen.id,
-              ),
-              SettingsButton(
-                btnText: 'Location Services',
-                screenNavRoute: LocationServicesScreen.id,
-              ),
-              SettingsButton(
-                btnText: 'Help',
-                screenNavRoute: HelpScreen.id,
               ),
               SettingsButton(
                 btnText: 'Logout',

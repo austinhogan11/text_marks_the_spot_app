@@ -45,7 +45,6 @@ class ChangedUsernameScreen extends StatelessWidget {
               CustomButton(
                 color: Colors.white,
                 textColor: kPrimaryColor,
-                fontSize: 18.0,
                 btnText: 'Back',
                 onTap: () => Navigator.pushNamed(context, AccountScreen.id),
               ),
