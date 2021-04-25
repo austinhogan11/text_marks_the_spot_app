@@ -130,14 +130,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 shape: CircleBorder(),
-                                onPressed: () {
-                                  getLocation();
-                                  _mapController.animateCamera(
-                                      CameraUpdate.newCameraPosition(
-                                          CameraPosition(
-                                              target: LatLng(this.latitude,
-                                                  this.longitude),
-                                              zoom: 15.0)));
+                                onPressed: () async {
+                                  await getLocation();
+                                  setState(() {
+                                    _mapController.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                                target: LatLng(this.latitude,
+                                                    this.longitude),
+                                                zoom: 15.0)));
+                                  });
                                 },
                               ),
                             ],
@@ -221,11 +223,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void getLocation() async {
+  Future<String> getLocation() async {
     var p = await determinePosition();
 
     this.latitude = p.latitude;
     this.longitude = p.longitude;
+
 
     setState(() {
       getMarkers();
@@ -260,6 +263,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _circles.add(youCircle);
 
     _markers.add(you);
+
+    return "Success";
   }
 
   void getMarkers() async {
