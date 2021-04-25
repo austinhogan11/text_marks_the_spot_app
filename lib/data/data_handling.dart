@@ -76,6 +76,7 @@ class DataHandling {
     String senderUsername;
     await users.get().then((QuerySnapshot querySnapshot) => {
           querySnapshot.docs.forEach((doc) {
+            print("LOOOOOOOOOOOOOOP");
             if (recipientUsername == doc['username']) {
               print(
                   'Username: $recipientUsername\nDocument Username: ${doc['username']}');
@@ -83,8 +84,10 @@ class DataHandling {
               recipientUID = doc.id;
               print(recipientUID);
             }
-
             if (senderUID == doc.id) {
+              print("HEERERERERRERERERERERERERERERERERERERERE");
+              print(senderUID);
+              print("HEERERERERRERERERERERERERERERERERERERERE");
               senderUsername = doc['username'];
             }
           })
@@ -107,7 +110,8 @@ class DataHandling {
     //     .then((value) => print(
     //         'Textmark Saved:\nSender: ${loggedInUser.uid}\nRecipient: $recipientUID\nCoordinates: ${coordinates.longitude}, ${coordinates.latitude}\nLocation Nickname: $locationNickname\nMessage: $messageContents'))
     //     .catchError((e) => print('Failed to save Textmark.'));
-
+print(senderUsername);
+print("END ---------------------------");
     textmarks
         .doc("${loggedInUser.uid}${creationDate.toString()}")
         .set({

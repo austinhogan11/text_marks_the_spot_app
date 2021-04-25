@@ -5,8 +5,6 @@ import 'package:text_marks_the_spot_app/components/custom_button.dart';
 import 'package:text_marks_the_spot_app/constants.dart';
 import 'package:text_marks_the_spot_app/data/data_handling.dart';
 
-final User currentUser = FirebaseAuth.instance.currentUser;
-
 class CreateTextMark extends StatefulWidget {
   final GeoPoint coordinates;
 
@@ -27,6 +25,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
     super.initState();
   }
 
+  final User currentUser = FirebaseAuth.instance.currentUser;
   String textMarkRecipientUsername;
   String textMarkNickname;
   String textMarkMessage;
@@ -154,6 +153,7 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                       }
                       print(
                           "Current Date: $creationDate\n ExpirationDate: $expirationDate");
+                      print(currentUser.uid);
                       DataHandling()
                           .saveTextMark(
                               creationDate,

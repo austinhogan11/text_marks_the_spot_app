@@ -272,13 +272,12 @@ class _HomeScreenState extends State<HomeScreen> {
     String id;
     double hue;
     String user;
-    String snippet;
-    bool isReceived;
+    bool isReceived = false;
     Set<Marker> newMarkers = new Set<Marker>();
 
     firestoreTextMarks.docs.forEach((map) {
-      isReceived = false;
       if (map.data().containsValue(loggedInUser.uid)) {
+        isReceived = false;
         markerCoordinates = map["coordinates"];
         if (map["senderUID"] == loggedInUser.uid) {
           id = "Sent/" +
@@ -288,11 +287,8 @@ class _HomeScreenState extends State<HomeScreen> {
               "/" +
               markerCoordinates.longitude.toString();
           hue = 240;
-          snippet =
-              "Sent to ${map["recipientUsername"]} on ${map["dateLabel"]}";
           user = map["recipientUsername"];
         } else if (map["recipientUID"] == loggedInUser.uid) {
-          isReceived = true;
           id = "Received/" +
               loggedInUser.uid +
               "/" +
@@ -300,9 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
               "/" +
               markerCoordinates.longitude.toString();
           hue = 0;
-          snippet = "Sent by ${map["senderUsername"]} on ${map["dateLabel"]}";
           user = map["senderUsername"];
+          isReceived = true;
         }
+
+        String snippet = isReceived == true ? "Sent by ${map["senderUsername"]} on ${map["dateLabel"]}" :
+        "Sent to ${map["recipientUsername"]} on ${map["dateLabel"]}";
 
         newMarkers.add(new Marker(
             markerId: new MarkerId(id),
