@@ -153,7 +153,6 @@ class _CreateTextMarkState extends State<CreateTextMark> {
                       }
                       print(
                           "Current Date: $creationDate\n ExpirationDate: $expirationDate");
-                      print(currentUser.uid);
                       DataHandling()
                           .saveTextMark(
                               creationDate,
